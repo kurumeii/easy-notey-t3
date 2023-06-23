@@ -1,28 +1,47 @@
-# Create T3 App
+# Easy Note-y
 
-This is a [T3 Stack](https://create.t3.gg/) project bootstrapped with `create-t3-app`.
+A web app for note-taking app built with love and joy.
 
-## What's next? How do I make an app with this?
+## Tech stack
 
-We try to keep this project as simple as possible, so you can start with just the scaffolding we set up for you, and add additional things later when they become necessary.
+<details>
+  <summary>Frontend</summary>
 
-If you are not familiar with the different technologies used in this project, please refer to the respective docs. If you still are in the wind, please join our [Discord](https://t3.gg/discord) and ask for help.
+  - [Reactjs](https://react.dev/)
+  - [Typescript](https://www.typescriptlang.org/)
+  - [Tailwind css](https://tailwindcss.com/)
+  - [Radix ui](https://www.radix-ui.com/)
+  - [Lucide Icons](https://lucide.dev/icons/)
+  - [Phosphor Icons](https://phosphoricons.com/)
+  - [zod](https://zod.dev/)
+</details>
 
-- [Next.js](https://nextjs.org)
-- [NextAuth.js](https://next-auth.js.org)
-- [Prisma](https://prisma.io)
-- [Tailwind CSS](https://tailwindcss.com)
-- [tRPC](https://trpc.io)
+<details>
+  <summary>Backend</summary>
 
-## Learn More
+  - [Nextjs](https://nextjs.org/)
+  - [NextAuth](https://next-auth.js.org/)
+  - [Prisma ORM](https://www.prisma.io/)
+  - [tRPC](https://trpc.io/)
+  - [Mongodb](https://www.mongodb.com/)
+  - [Vercel](https://vercel.com/home)
+</details>
 
-To learn more about the [T3 Stack](https://create.t3.gg/), take a look at the following resources:
+## Roadmap
 
-- [Documentation](https://create.t3.gg/)
-- [Learn the T3 Stack](https://create.t3.gg/en/faq#what-learning-resources-are-currently-available) — Check out these awesome tutorials
+### Authentication 
+- [ ] Sign up new account
+- [ ] Sign in with multiple providers or with credentials
+### Landing page
+- [ ] Responsive navbar
+- [ ] Hero section
+- [ ] Features section
+- [ ] Tech section
+- [ ] Footer section
 
-You can check out the [create-t3-app GitHub repository](https://github.com/t3-oss/create-t3-app) — your feedback and contributions are welcome!
-
-## How do I deploy this?
-
-Follow our deployment guides for [Vercel](https://create.t3.gg/en/deployment/vercel), [Netlify](https://create.t3.gg/en/deployment/netlify) and [Docker](https://create.t3.gg/en/deployment/docker) for more information.
+### Main feats
+- [ ] CRUD new notes
+- [ ] Markdown support editors
+- [ ] Auto saving for a number of times
+- [ ] Search / filter notes
+- [ ] Change between dark/light/devices themes
