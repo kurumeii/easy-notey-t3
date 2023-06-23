@@ -40,7 +40,6 @@ export const authOptions: NextAuthOptions = {
     GithubProvider({
       clientId: env.GITHUB_CLIENT_ID,
       clientSecret: env.GITHUB_CLIENT_SECRET,
-      allowDangerousEmailAccountLinking: true,
     }),
     GoogleProvider({
       clientId: env.GOOGLE_CLIENT_ID,
@@ -52,7 +51,6 @@ export const authOptions: NextAuthOptions = {
           response_type: "code",
         },
       },
-      allowDangerousEmailAccountLinking: true,
     }),
     CredentialProvider({
       name: "credentials",
@@ -85,9 +83,9 @@ export const authOptions: NextAuthOptions = {
     }),
   ],
   pages: {
-    signIn: "/auth/signin",
+    signIn: "/",
     signOut: "/",
-    error: "/auth/signin",
+    error: "/",
   },
 }
 

@@ -1,6 +1,6 @@
 import { Dialog, DialogContent, DialogTrigger } from "@/components/Ui/dialog"
-import SignInForm from "../Forms/SignInForm"
 import { Icons } from "../Icons/Icons"
+import AuthModal from "../Modals/AuthModal"
 import { Button } from "../Ui/button"
 
 const MenuBar = () => {
@@ -16,7 +16,7 @@ const MenuBar = () => {
             </Button>
           </DialogTrigger>
           <DialogContent>
-            <SignInForm />
+            <AuthModal />
           </DialogContent>
         </Dialog>
       </div>

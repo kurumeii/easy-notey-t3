@@ -1,6 +1,7 @@
 import { Sheet, SheetContent, SheetTrigger } from "@/components/Ui/sheet"
 import useResponsive from "@/hooks/useResponsive"
 import Link from "next/link"
+import { useEffect, useState } from "react"
 import { Icons } from "../Icons/Icons"
 import { Button } from "../Ui/button"
 import { Separator } from "../Ui/separator"
@@ -12,6 +13,14 @@ type Props = {
 
 const AppBar = ({ className }: Props) => {
   const { screen } = useResponsive()
+  const [mounted, setMounted] = useState(false)
+
+  useEffect(() => {
+    setMounted(true)
+  }, [])
+
+  if (!mounted) return null
+
   return (
     <>
       <nav className={className}>
@@ -26,27 +35,23 @@ const AppBar = ({ className }: Props) => {
         </Link>
         {/* Appbar burger on small screen */}
         {/* Right menu on medium screen */}
-        {screen.sm ? <Burger /> : <MenuBar />}
+        {screen.sm ? (
+          <Sheet>
+            <SheetTrigger asChild>
+              <Button variant={"ghost"} size={"icon"}>
+                <Icons.burger className="h-7 w-7" />
+              </Button>
+            </SheetTrigger>
+            <SheetContent className="w-full">
+              <MenuBar />
+            </SheetContent>
+          </Sheet>
+        ) : (
+          <MenuBar />
+        )}
       </nav>
       {screen.sm && <Separator />}
     </>
   )
 }
 export default AppBar
-
-const Burger = () => {
-  return (
-    <>
-      <Sheet>
-        <SheetTrigger asChild>
-          <Button variant={"ghost"} size={"icon"}>
-            <Icons.burger className="h-7 w-7" />
-          </Button>
-        </SheetTrigger>
-        <SheetContent className="w-full">
-          <MenuBar />
-        </SheetContent>
-      </Sheet>
-    </>
-  )
-}
