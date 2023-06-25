@@ -1,32 +1,77 @@
+import { Icons } from "@/components/Icons/Icons"
 import AppBar from "@/components/Landing/AppBar"
+import { Button } from "@/components/Ui/button"
 import { cn } from "@/lib/utils"
-import { getServerAuthSession } from "@/server/auth"
-import { type GetServerSidePropsContext } from "next"
-
-export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
-  const session = await getServerAuthSession(ctx)
-  if (session) {
-    return {
-      redirect: {
-        destination: "/notes",
-      },
-    }
-  }
-  return {
-    props: {},
-  }
-}
+import Image from "next/image"
+import Typewriter from "typewriter-effect"
 
 export default function LandingPage() {
+  const descriptionText =
+    "A simple but subtle web app for all your Markdown note-taking needs, mainly focused on productivity, powered by awesome open-source tech."
   return (
     <>
-      <section className="h-screen w-full">
+      <main className="h-screen w-full md:container">
         <AppBar
           className={cn(
-            "container sticky flex items-center justify-between bg-transparent py-3 backdrop-blur-xl animate-in slide-in-from-top duration-300 md:top-5 md:w-11/12 md:rounded-3xl md:border md:border-border"
+            "container sticky inset-x-0 top-0 flex items-center justify-between bg-transparent py-3 backdrop-blur-md animate-in slide-in-from-top duration-300 md:my-5 md:rounded-3xl "
           )}
         />
-      </section>
+        {/* Hero section */}
+        <section className="container py-10">
+          <h1 className="mx-auto text-center text-4xl font-extrabold leading-tight tracking-tighter animate-in slide-in-from-bottom-1/4 duration-1000 xl:max-w-5xl xl:text-6xl xl:leading-tight">
+            The easy way for taking notes 🙌
+          </h1>
+          <div className="mt-4 grid items-center gap-2 md:grid-cols-2">
+            <Typewriter
+              options={{
+                strings: descriptionText,
+                autoStart: true,
+                loop: false,
+                wrapperClassName:
+                  "mx-auto max-w-4xl text-center font-mono text-lg",
+              }}
+            />
+            <figure className="mx-auto flex w-full items-center justify-center">
+              <Image
+                src={"/image/hero.svg"}
+                alt="Hero background"
+                width={1000}
+                height={1000}
+              />
+            </figure>
+          </div>
+          <div className="mt-5 flex items-center justify-center gap-5">
+            <Button variant="secondary">
+              <Icons.github className="mr-2 h-5 w-5" />
+              Source
+            </Button>
+            <Button variant="default">
+              <Icons.started className="mr-2 h-5 w-5" />
+              Getting started
+            </Button>
+          </div>
+          {/* Preview images */}
+          <figure className="mx-auto flex w-full items-center justify-center ">
+            <Image
+              className="mx-auto mt-16 block max-w-xs rounded-lg border-2 border-border drop-shadow-2xl md:hidden"
+              src="/image/notes-mobile-light.jpg"
+              alt="A preview of the main dashboard for LuccaNotes"
+              width={1000}
+              height={1000}
+            />
+
+            {/* Hero image (desktop) */}
+            <Image
+              className="mx-auto mt-16 hidden rounded-lg border-2 border-border drop-shadow-2xl md:block lg:max-w-5xl xl:max-w-6xl"
+              src="/image/notes-light.png"
+              alt="A preview of the main dashboard for LuccaNotes"
+              width={1000}
+              height={1000}
+            />
+          </figure>
+        </section>
+        {/* Feats section */}
+      </main>
     </>
   )
 }
