@@ -1,8 +1,10 @@
 import { Icons } from "@/components/Icons/Icons"
 import AppBar from "@/components/Landing/AppBar"
-import { Button } from "@/components/Ui/button"
+import { buttonVariants } from "@/components/Ui/button"
+import { siteConfig } from "@/lib/site"
 import { cn } from "@/lib/utils"
 import Image from "next/image"
+import Link from "next/link"
 import Typewriter from "typewriter-effect"
 
 export default function LandingPage() {
@@ -28,7 +30,7 @@ export default function LandingPage() {
                 autoStart: true,
                 loop: false,
                 wrapperClassName:
-                  "mx-auto max-w-4xl text-center font-mono text-lg",
+                  "mx-auto max-w-4xl text-center font-mono text-lg leading-tight tracking-tighter",
               }}
             />
             <figure className="mx-auto flex w-full items-center justify-center">
@@ -41,14 +43,21 @@ export default function LandingPage() {
             </figure>
           </div>
           <div className="mt-5 flex items-center justify-center gap-5">
-            <Button variant="secondary">
+            <Link
+              href={siteConfig.code}
+              target="_blank"
+              className={cn(buttonVariants({ variant: "secondary" }))}
+            >
               <Icons.github className="mr-2 h-5 w-5" />
               Source
-            </Button>
-            <Button variant="default">
+            </Link>
+            <Link
+              href={"/notes"}
+              className={cn(buttonVariants({ variant: "default" }))}
+            >
               <Icons.started className="mr-2 h-5 w-5" />
               Getting started
-            </Button>
+            </Link>
           </div>
           {/* Preview images */}
           <figure className="mx-auto flex w-full items-center justify-center ">

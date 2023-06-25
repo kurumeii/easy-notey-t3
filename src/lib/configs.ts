@@ -5,6 +5,7 @@ export const nextSeoConfig: NextSeoProps = {
   title: "Easy Notey | Note taking app",
   description: "A web app for easy taking note",
   defaultTitle: "Notey",
+  themeColor: "(prefers-color-scheme: system)",
   additionalLinkTags: [
     {
       rel: "icon",
