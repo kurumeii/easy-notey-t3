@@ -30,8 +30,8 @@ A web app for note-taking app built with love and joy.
 ## Roadmap
 
 ### Authentication 
-- [ ] Sign up new account
-- [ ] Sign in with multiple providers or with credentials
+- [x] ~~Sign up new account~~
+- [x] ~~Sign in with multiple providers or with credentials~~
 ### Landing page
 - [ ] Responsive navbar
 - [ ] Hero section

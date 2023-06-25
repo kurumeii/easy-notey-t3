@@ -1,6 +1,8 @@
 import { useToast } from "@/hooks/useToast"
 import { SignUpForm, SignUpSchema } from "@/lib/schemas"
+import { api } from "@/utils/api"
 import { zodResolver } from "@hookform/resolvers/zod"
+import { signIn } from "next-auth/react"
 import { useRouter } from "next/router"
 import { useState } from "react"
 import { useForm, type SubmitHandler } from "react-hook-form"
@@ -20,6 +22,7 @@ const SignUpForm = () => {
   const { toast } = useToast()
   const { push } = useRouter()
   const [isRavelio, setRavelio] = useState(false)
+
   const form = useForm<SignUpForm>({
     resolver: zodResolver(
       SignUpSchema.superRefine(({ password, rePassword }, ctx) => {
@@ -40,8 +43,43 @@ const SignUpForm = () => {
     },
   })
 
+  const signUp = api.auth.signUp.useMutation({
+    onError: (err) => {
+      toast({
+        title: "Error",
+        description: err.message,
+        variant: "destructive",
+      })
+    },
+    onSuccess: async () => {
+      toast({
+        title: "Created new successful",
+        description: "Wait for page to redirect to login page",
+      })
+      const response = await signIn("credentials", {
+        email: form.getValues("email"),
+        password: form.getValues("password"),
+        redirect: false,
+      })
+      if (response?.error) {
+        toast({
+          title: "Error",
+          description: response?.error ?? "Something went wrong",
+          variant: "destructive",
+        })
+      } else if (response?.ok) {
+        toast({
+          title: "Signin successful",
+        })
+        await push("/notes")
+      }
+    },
+  })
+
   const onSubmitFn: SubmitHandler<SignUpForm> = (data) => {
-    console.log(data)
+    signUp.mutate({
+      ...data,
+    })
   }
 
   return (

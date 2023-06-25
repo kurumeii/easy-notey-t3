@@ -8,7 +8,7 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
   if (session) {
     return {
       redirect: {
-        destination: "/",
+        destination: "/notes",
       },
     }
   }
@@ -17,7 +17,7 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
   }
 }
 
-export default function Home() {
+export default function LandingPage() {
   return (
     <>
       <section className="h-screen w-full">
