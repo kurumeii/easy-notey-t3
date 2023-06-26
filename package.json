@@ -7,7 +7,8 @@
     "dev": "next dev",
     "postinstall": "prisma generate",
     "lint": "next lint",
-    "start": "next start"
+    "start": "next start",
+    "preview": "pnpm build && pnpm start"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.1.1",
@@ -63,6 +64,7 @@
     "react-hook-form": "^7.45.0",
     "react-intersection-observer": "^9.5.1",
     "react-responsive": "^9.0.2",
+    "sharp": "^0.32.1",
     "superjson": "1.12.2",
     "tailwind-merge": "^1.13.2",
     "tailwindcss-animate": "^1.0.6",

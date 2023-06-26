@@ -40,8 +40,8 @@ A web app for note-taking app built with love and joy.
 - [X] ~~Footer section~~
 
 ### Main feats
+- [ ] Change between dark/light/devices themes
 - [ ] CRUD new notes
 - [ ] Markdown support editors
 - [ ] Auto saving for a number of times
 - [ ] Search / filter notes
-- [ ] Change between dark/light/devices themes
