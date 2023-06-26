@@ -1,9 +1,11 @@
 import { FadeUp } from "@/components/Animations/FadeUp"
 import { Icons } from "@/components/Icons/Icons"
 import { buttonVariants } from "@/components/Ui/button"
+import useHydrated from "@/hooks/useHydrated"
 import useResponsive from "@/hooks/useResponsive"
 import { siteConfig } from "@/lib/site"
 import { cn } from "@/lib/utils"
+import { useTheme } from "next-themes"
 import Image from "next/image"
 import Link from "next/link"
 import Typewriter from "typewriter-effect"
@@ -12,7 +14,10 @@ const HeroSection = ({ className }: { className?: string }) => {
   const descriptionText =
     "A simple but subtle web app for all your Markdown note-taking needs, mainly focused on productivity, powered by awesome open-source tech."
   const { screen } = useResponsive()
+  const { systemTheme } = useTheme()
+  const { mounted } = useHydrated()
 
+  if (!mounted) return null
   return (
     <section className={className}>
       <FadeUp className="mx-auto text-center text-4xl font-extrabold leading-tight tracking-tighter  xl:max-w-5xl xl:text-6xl xl:leading-tight">
@@ -34,13 +39,18 @@ const HeroSection = ({ className }: { className?: string }) => {
             }}
           />
         )}
-
-        <figure className="mx-auto flex w-full items-center justify-center delay-500">
+        <figure className="relative mx-auto h-96 w-96 ">
           <Image
-            src={"/image/hero.svg"}
+            src={
+              systemTheme === "dark"
+                ? "/image/hero-dark.svg"
+                : "/image/hero.svg"
+            }
             alt="Hero background"
-            width={1000}
-            height={1000}
+            fill
+            priority
+            sizes="100vw"
+            className=" object-fill"
           />
         </figure>
       </div>

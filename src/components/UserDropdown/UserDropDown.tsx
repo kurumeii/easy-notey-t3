@@ -1,4 +1,5 @@
 import useGetSession from "@/hooks/useGetSession"
+import { signOut } from "next-auth/react"
 import Link from "next/link"
 import { Icons } from "../Icons/Icons"
 import AvatarSkeleton from "../Skeletons/AvatarSkeleton"
@@ -33,7 +34,10 @@ const UserDropDown = () => {
           <Link href={"/notes"}>Open to dashboard</Link>
         </DropdownMenuItem>
         <DropdownMenuSeparator />
-        <DropdownMenuItem className="text-destructive hover:bg-destructive hover:text-destructive-foreground focus:bg-destructive focus:text-destructive-foreground">
+        <DropdownMenuItem
+          onClick={() => void signOut()}
+          className="text-destructive hover:bg-destructive hover:text-destructive-foreground focus:bg-destructive focus:text-destructive-foreground"
+        >
           <Icons.signOut className="mr-2 h-5 w-5" />
           Log out
         </DropdownMenuItem>

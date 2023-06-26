@@ -1,7 +1,4 @@
-import { useToast } from "@/hooks/useToast"
-import { type BuiltInProviderType } from "next-auth/providers"
 import { signIn } from "next-auth/react"
-import { useRouter } from "next/router"
 import { useState } from "react"
 import SignInForm from "../Forms/SignInForm"
 import SignUpForm from "../Forms/SignUpForm"
@@ -12,26 +9,6 @@ type FormType = "SIGNIN" | "SIGNUP"
 
 const AuthModal = () => {
   const [formType, setFormType] = useState<FormType>("SIGNIN")
-  const { push } = useRouter()
-  const { toast } = useToast()
-
-  const signInWith = async (key: BuiltInProviderType) => {
-    const response = await signIn(key, {
-      redirect: false,
-    })
-    if (response?.error) {
-      toast({
-        title: "Error",
-        description: response?.error ?? "Something went wrong",
-        variant: "destructive",
-      })
-    } else if (response?.ok) {
-      toast({
-        title: "Signin successful",
-      })
-      void push("/")
-    }
-  }
 
   return (
     <>
@@ -53,7 +30,7 @@ const AuthModal = () => {
           variant={"outline"}
           size={"icon"}
           className="rounded-full"
-          onClick={() => void signInWith("google")}
+          onClick={() => void signIn("google")}
           type="button"
         >
           <Icons.google className="h-5 w-5" />
@@ -62,7 +39,7 @@ const AuthModal = () => {
           variant={"outline"}
           size={"icon"}
           className="rounded-full"
-          onClick={() => void signInWith("github")}
+          onClick={() => void signIn("github")}
           type="button"
         >
           <Icons.github className="h-5 w-5" />

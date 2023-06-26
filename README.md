@@ -14,6 +14,7 @@ A web app for note-taking app built with love and joy.
   - [Lucide Icons](https://lucide.dev/icons/)
   - [Phosphor Icons](https://phosphoricons.com/)
   - [zod](https://zod.dev/)
+  - [Illustrations](https://undraw.co/illustrations)
 </details>
 
 <details>
@@ -33,7 +34,7 @@ A web app for note-taking app built with love and joy.
 - [x] ~~Sign up new account~~
 - [x] ~~Sign in with multiple providers or with credentials~~
 ### Landing page
-- [x] Hero section
+- [x] ~~Hero section~~
 - [ ] Features section
 - [ ] Tech section
 - [ ] Footer section
