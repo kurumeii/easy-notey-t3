@@ -1,7 +1,7 @@
 import { Sheet, SheetContent, SheetTrigger } from "@/components/Ui/sheet"
+import useHydrated from "@/hooks/useHydrated"
 import useResponsive from "@/hooks/useResponsive"
 import Link from "next/link"
-import { useEffect, useState } from "react"
 import { Icons } from "../Icons/Icons"
 import { Button } from "../Ui/button"
 import { Separator } from "../Ui/separator"
@@ -13,11 +13,7 @@ type Props = {
 
 const AppBar = ({ className }: Props) => {
   const { screen } = useResponsive()
-  const [mounted, setMounted] = useState(false)
-
-  useEffect(() => {
-    setMounted(true)
-  }, [])
+  const { mounted } = useHydrated()
 
   if (!mounted) return null
 
