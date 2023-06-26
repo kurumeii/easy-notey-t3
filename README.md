@@ -37,7 +37,7 @@ A web app for note-taking app built with love and joy.
 - [x] ~~Hero section~~
 - [x] ~~Features section~~
 - [x] ~~Tech section~~
-- [ ] Footer section
+- [X] ~~Footer section~~
 
 ### Main feats
 - [ ] CRUD new notes
