@@ -1,82 +1,17 @@
-import { FadeUp } from "@/components/Animations/FadeUp"
-import { Icons } from "@/components/Icons/Icons"
 import AppBar from "@/components/Landing/AppBar"
-import { buttonVariants } from "@/components/Ui/button"
-import { siteConfig } from "@/lib/site"
-import { cn } from "@/lib/utils"
-import Image from "next/image"
-import Link from "next/link"
-import Typewriter from "typewriter-effect"
+import Features from "@/components/Landing/Features"
+import HeroSection from "@/components/Landing/HeroSection"
+
 export default function LandingPage() {
-  const descriptionText =
-    "A simple but subtle web app for all your Markdown note-taking needs, mainly focused on productivity, powered by awesome open-source tech."
   return (
     <>
-      <main className="h-screen w-full ">
+      <div className="h-screen w-full ">
         <AppBar className="sticky inset-x-0 top-0 z-20 flex w-full items-center justify-between bg-transparent px-5 py-3 backdrop-blur-lg animate-in slide-in-from-top-full duration-500 md:my-5 md:rounded-3xl" />
         {/* Hero section */}
-        <section className="container py-10">
-          <FadeUp className="mx-auto text-center text-4xl font-extrabold leading-tight tracking-tighter  xl:max-w-5xl xl:text-6xl xl:leading-tight">
-            <h1>The easy way for taking notes 🙌</h1>
-          </FadeUp>
-          <div className="mt-4 grid items-center gap-2 md:grid-cols-2">
-            <Typewriter
-              options={{
-                strings: descriptionText,
-                autoStart: true,
-                loop: false,
-                wrapperClassName:
-                  "mx-auto max-w-4xl text-center font-mono text-lg leading-tight tracking-tighter",
-              }}
-            />
-            <figure className="mx-auto flex w-full items-center justify-center delay-500">
-              <Image
-                src={"/image/hero.svg"}
-                alt="Hero background"
-                width={1000}
-                height={1000}
-              />
-            </figure>
-          </div>
-          <FadeUp className="mt-5 flex items-center justify-center gap-5">
-            <Link
-              href={siteConfig.code}
-              target="_blank"
-              className={cn(buttonVariants({ variant: "secondary" }))}
-            >
-              <Icons.github className="mr-2 h-5 w-5" />
-              Source
-            </Link>
-            <Link
-              href={"/notes"}
-              className={cn(buttonVariants({ variant: "default" }))}
-            >
-              <Icons.started className="mr-2 h-5 w-5" />
-              Getting started
-            </Link>
-          </FadeUp>
-          {/* Preview images */}
-          <figure className="mx-auto flex w-full items-center justify-center ">
-            <Image
-              className="mx-auto mt-16 block max-w-xs rounded-lg border-2 border-border drop-shadow-2xl md:hidden"
-              src="/image/notes-mobile-light.jpg"
-              alt="A preview of the main dashboard for LuccaNotes"
-              width={1000}
-              height={1000}
-            />
-
-            {/* Hero image (desktop) */}
-            <Image
-              className="mx-auto mt-16 hidden rounded-lg border-2 border-border drop-shadow-2xl md:block lg:max-w-5xl xl:max-w-6xl"
-              src="/image/notes-light.png"
-              alt="A preview of the main dashboard for LuccaNotes"
-              width={1000}
-              height={1000}
-            />
-          </figure>
-        </section>
+        <HeroSection className="container py-10" />
         {/* Feats section */}
-      </main>
+        <Features className="container py-16" />
+      </div>
     </>
   )
 }
