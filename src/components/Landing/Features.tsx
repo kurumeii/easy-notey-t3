@@ -1,13 +1,13 @@
 import { Fragment } from "react"
-import { Icons } from "../Icons/Icons"
+import { Icons, type IconProps } from "../Icons/Icons"
 
 type Feats = {
   title: string
   description: string
-  icons: (typeof Icons)[keyof typeof Icons]
+  icons: IconProps
 }
 
-const feats: Array<Feats> = [
+const feats: Feats[] = [
   {
     title: "Github flavored markdown",
     description:

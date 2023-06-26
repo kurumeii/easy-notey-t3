@@ -63,3 +63,5 @@ export const Icons = {
   keyboard: Keyboard,
   search: MagnifyingGlass,
 }
+
+export type IconProps = (typeof Icons)[keyof typeof Icons]

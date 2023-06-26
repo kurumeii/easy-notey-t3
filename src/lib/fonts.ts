@@ -1,6 +1,6 @@
 import {
-  Fira_Mono as FontMono,
-  Montserrat as FontSans,
+  Roboto_Mono as FontMono,
+  Roboto as FontSans,
   Inconsolata as FontSerif,
 } from "next/font/google"
 
@@ -11,7 +11,7 @@ const fontSans = FontSans({
 })
 
 const fontMono = FontMono({
-  subsets: ["latin"],
+  subsets: ["latin", "vietnamese"],
   variable: "--font-mono",
   weight: ["400", "500", "700"],
 })

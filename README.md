@@ -35,8 +35,8 @@ A web app for note-taking app built with love and joy.
 - [x] ~~Sign in with multiple providers or with credentials~~
 ### Landing page
 - [x] ~~Hero section~~
-- [ ] Features section
-- [ ] Tech section
+- [x] ~~Features section~~
+- [x] ~~Tech section~~
 - [ ] Footer section
 
 ### Main feats
