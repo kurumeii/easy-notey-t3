@@ -30,4 +30,15 @@ export const VARIANTS = {
     visible: { opacity: 1, x: 0 },
     right: { opacity: 0, x: "25vw" },
   },
+  APPEAR_VARIANTS: {
+    hidden: {
+      opacity: 0,
+      scale: 0,
+    },
+    visible: {
+      opacity: 1,
+      scale: 1,
+      transition: { delay: 0.5 },
+    },
+  },
 }

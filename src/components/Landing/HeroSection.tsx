@@ -1,11 +1,11 @@
 import { FadeUp } from "@/components/Animations/FadeUp"
 import { Icons } from "@/components/Icons/Icons"
 import { buttonVariants } from "@/components/Ui/button"
+import useCustomTheme from "@/hooks/useCustomTheme"
 import useHydrated from "@/hooks/useHydrated"
 import useResponsive from "@/hooks/useResponsive"
 import { siteConfig } from "@/lib/site"
 import { cn } from "@/lib/utils"
-import { useTheme } from "next-themes"
 import Image from "next/image"
 import Link from "next/link"
 import Typewriter from "typewriter-effect"
@@ -14,7 +14,7 @@ const HeroSection = ({ className }: { className?: string }) => {
   const descriptionText =
     "A simple but subtle web app for all your Markdown note-taking needs, mainly focused on productivity, powered by awesome open-source tech."
   const { screen } = useResponsive()
-  const { systemTheme } = useTheme()
+  const { isDarkTheme } = useCustomTheme()
   const { mounted } = useHydrated()
 
   if (!mounted) return null
@@ -41,11 +41,7 @@ const HeroSection = ({ className }: { className?: string }) => {
         )}
         <figure className="relative mx-auto h-96 w-96 ">
           <Image
-            src={
-              systemTheme === "dark"
-                ? "/image/hero-dark.svg"
-                : "/image/hero.svg"
-            }
+            src={isDarkTheme ? "/image/hero-dark.svg" : "/image/hero.svg"}
             alt="Hero background"
             fill
             priority

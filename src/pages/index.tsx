@@ -1,3 +1,4 @@
+import FloatButton from "@/components/FloatButton/FloatButton"
 import AppBar from "@/components/Landing/AppBar"
 import Features from "@/components/Landing/Features"
 import Footer from "@/components/Landing/Footer"
@@ -14,6 +15,8 @@ export default function LandingPage() {
       <Features className="container py-20" />
       {/* Techs section */}
       <Technologies className="container py-20" />
+      {/* Float buttons */}
+      <FloatButton className="sticky bottom-0 left-0 p-5" />
       {/* Footer */}
       <Footer className="flex w-full items-end justify-end px-6 py-3 text-muted-foreground" />
     </>

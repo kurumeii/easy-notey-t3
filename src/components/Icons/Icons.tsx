@@ -1,6 +1,8 @@
 import { cn } from "@/lib/utils"
 import {
   BookBookmark,
+  Command,
+  Devices,
   Eye,
   FacebookLogo,
   FloppyDisk,
@@ -8,9 +10,11 @@ import {
   GoogleLogo,
   Keyboard,
   MagnifyingGlass,
+  Moon,
   SignIn,
   SignOut,
   Sparkle,
+  Sun,
   TwitterLogo,
 } from "@phosphor-icons/react"
 import {
@@ -62,6 +66,10 @@ export const Icons = {
   preview: Eye,
   keyboard: Keyboard,
   search: MagnifyingGlass,
+  floatMenu: Command,
+  sun: Sun,
+  moon: Moon,
+  device: Devices,
 }
 
 export type IconProps = (typeof Icons)[keyof typeof Icons]

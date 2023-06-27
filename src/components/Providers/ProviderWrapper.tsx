@@ -20,7 +20,7 @@ const ProviderWrapper = ({ session, children }: Props) => (
       <main
         className={cn(
           nextFonts,
-          "scroll-smooth bg-background font-sans text-foreground antialiased"
+          "relative scroll-smooth bg-background font-sans text-foreground antialiased"
         )}
       >
         {children}
