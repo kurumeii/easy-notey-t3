@@ -1,50 +1,20 @@
-import { Sheet, SheetContent, SheetTrigger } from "@/components/Ui/sheet"
-import useHydrated from "@/hooks/useHydrated"
 import useResponsive from "@/hooks/useResponsive"
-import Link from "next/link"
-import { Icons } from "../Icons/Icons"
-import { Button } from "../Ui/button"
+import { type ReactNode } from "react"
 import { Separator } from "../Ui/separator"
-import MenuBar from "./MenuBar"
 
 type Props = {
   className?: string
+  children?: ReactNode
 }
 
-const AppBar = ({ className }: Props) => {
+const AppBar = ({ className, children }: Props) => {
   const { screen } = useResponsive()
-  const { mounted } = useHydrated()
-
-  if (!mounted) return null
 
   return (
     <>
       <nav className={className}>
         {/* Logo brand section */}
-        <Link className="flex items-center gap-3" href="/">
-          <div className="flex h-12 w-12 flex-grow items-center justify-center rounded-full bg-primary">
-            <Icons.logo className="h-6 w-6 fill-white" />
-          </div>
-          <span className="hidden text-xl font-semibold md:block">
-            Easy Note-y
-          </span>
-        </Link>
-        {/* Appbar burger on small screen */}
-        {/* Right menu on medium screen */}
-        {screen.sm ? (
-          <Sheet>
-            <SheetTrigger asChild>
-              <Button variant={"ghost"} size={"icon"}>
-                <Icons.burger className="h-7 w-7" />
-              </Button>
-            </SheetTrigger>
-            <SheetContent className="w-full">
-              <MenuBar />
-            </SheetContent>
-          </Sheet>
-        ) : (
-          <MenuBar />
-        )}
+        {children}
       </nav>
       {screen.sm && <Separator />}
     </>

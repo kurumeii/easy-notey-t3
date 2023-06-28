@@ -1,5 +1,6 @@
 import { cn } from "@/lib/utils"
 import {
+  At,
   BookBookmark,
   Command,
   Devices,
@@ -18,6 +19,7 @@ import {
   TwitterLogo,
 } from "@phosphor-icons/react"
 import {
+  ChevronRight,
   Loader2Icon,
   LockIcon,
   MenuIcon,
@@ -70,6 +72,8 @@ export const Icons = {
   sun: Sun,
   moon: Moon,
   device: Devices,
+  slash: ChevronRight,
+  at: At,
 }
 
 export type IconProps = (typeof Icons)[keyof typeof Icons]

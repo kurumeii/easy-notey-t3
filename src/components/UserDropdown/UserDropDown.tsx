@@ -31,7 +31,7 @@ const UserDropDown = () => {
         <DropdownMenuLabel>{user?.name}</DropdownMenuLabel>
         <DropdownMenuSeparator />
         <DropdownMenuItem asChild>
-          <Link href={"/notes"}>Open to dashboard</Link>
+          <Link href={"/notes"}>Go to notes</Link>
         </DropdownMenuItem>
         <DropdownMenuSeparator />
         <DropdownMenuItem

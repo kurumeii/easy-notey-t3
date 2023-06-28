@@ -47,7 +47,7 @@ const SignInForm = () => {
       toast({
         title: "Signin successful",
       })
-      void push("/")
+      void push("/notes")
     }
   }
 
