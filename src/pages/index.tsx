@@ -35,10 +35,10 @@ export default function LandingPage() {
 
   return (
     <>
-      <AppBar className="sticky inset-x-0 top-0 z-20 flex w-full items-center justify-between bg-transparent px-5 py-3 backdrop-blur-lg animate-in slide-in-from-top-full duration-500 md:my-5 ">
+      <AppBar className="sticky inset-x-0 top-0 z-20 flex w-full items-center justify-between bg-transparent px-5 py-3 backdrop-blur-lg animate-in slide-in-from-top-full duration-500">
         <Link className="flex items-center gap-3" href="/">
           <div className="flex h-12 w-12 flex-grow items-center justify-center rounded-full bg-primary">
-            <Icons.logo className="h-6 w-6 fill-white" />
+            <Icons.logo className="h-6 w-6 fill-primary-foreground" />
           </div>
           <span className="hidden text-xl font-semibold md:block">
             Easy Note-y
@@ -59,14 +59,16 @@ export default function LandingPage() {
           <MenuBar />
         )}
       </AppBar>
-      {/* Hero section */}
-      <HeroSection className="container py-10" />
-      {/* Feats section */}
-      <Features className="container py-20" />
-      {/* Techs section */}
-      <Technologies className="container py-20" />
-      {/* Float buttons */}
-      <FloatButton className="sticky bottom-0 left-0 p-5" />
+      <div className="bg-background">
+        {/* Hero section */}
+        <HeroSection className="container  py-10" />
+        {/* Feats section */}
+        <Features className="container  py-20" />
+        {/* Techs section */}
+        <Technologies className="container  py-20" />
+        {/* Float buttons */}
+        <FloatButton className="sticky bottom-0 left-0 mx-3 pb-3" />
+      </div>
       {/* Footer */}
       <Footer className="flex w-full items-end justify-end px-6 py-3 text-muted-foreground" />
     </>

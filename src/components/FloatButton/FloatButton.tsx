@@ -31,34 +31,28 @@ const FloatButton = ({ className }: { className?: string }) => {
           >
             <div className="flex flex-col gap-3">
               <Button
-                variant="outline"
+                variant={isLightTheme ? "default" : "outline"}
                 size="icon"
                 className="rounded-full"
                 onClick={() => changeTheme("light")}
               >
-                <Icons.sun
-                  className={cn("h-6 w-6", isLightTheme && "fill-primary")}
-                />
+                <Icons.sun className="h-6 w-6" />
               </Button>
               <Button
-                variant="outline"
+                variant={isDarkTheme ? "default" : "outline"}
                 size="icon"
                 className="rounded-full"
                 onClick={() => changeTheme("dark")}
               >
-                <Icons.moon
-                  className={cn("h-6 w-6", isDarkTheme && "fill-primary")}
-                />
+                <Icons.moon className="h-6 w-6" />
               </Button>
               <Button
-                variant="outline"
+                variant={isSystemDevice ? "default" : "outline"}
                 size="icon"
                 className="rounded-full"
                 onClick={() => changeTheme("system")}
               >
-                <Icons.device
-                  className={cn("h-6 w-6", isSystemDevice && "fill-primary")}
-                />
+                <Icons.device className="h-6 w-6" />
               </Button>
             </div>
           </PopoverContent>

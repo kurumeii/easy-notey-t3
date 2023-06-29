@@ -1,3 +1,4 @@
+import { Color } from "@prisma/client"
 import { z } from "zod"
 
 export const SignInSchema = z.object({
@@ -32,3 +33,21 @@ export const SignUpSchema = z.object({
 })
 
 export type SignUpForm = z.infer<typeof SignUpSchema>
+
+export const CreateNewNoteSchema = z.object({
+  title: z.string().min(1, { message: "Title can not leave empty" }),
+  tags: z.string().array(),
+})
+
+export type CreateNewNoteForm = z.infer<typeof CreateNewNoteSchema>
+
+export const CreateTagSchema = z.object({
+  name: z.string().min(1, { message: "Name tag can not leave empty" }),
+  color: z.nativeEnum(Color, { required_error: "Choose 1 color" }),
+})
+
+export type CreateTagSchemaForm = z.infer<typeof CreateTagSchema>
+
+export const DeleteTagSchema = z.object({
+  tagId: z.string().min(1, { message: "Action can not be done" }),
+})

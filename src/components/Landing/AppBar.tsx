@@ -12,10 +12,7 @@ const AppBar = ({ className, children }: Props) => {
 
   return (
     <>
-      <nav className={className}>
-        {/* Logo brand section */}
-        {children}
-      </nav>
+      <nav className={className}>{children}</nav>
       {screen.sm && <Separator />}
     </>
   )

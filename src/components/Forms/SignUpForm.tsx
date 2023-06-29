@@ -91,14 +91,13 @@ const SignUpForm = () => {
             name="name"
             render={({ field }) => (
               <FormItem>
-                <FormLabel htmlFor="name">Name</FormLabel>
+                <FormLabel>Name</FormLabel>
                 <FormControl>
                   <Input
                     className=""
                     autoComplete="on"
                     type="text"
                     placeholder="Your name"
-                    id="name"
                     {...field}
                   />
                 </FormControl>
@@ -111,10 +110,7 @@ const SignUpForm = () => {
             name="email"
             render={({ field }) => (
               <FormItem>
-                <FormLabel
-                  htmlFor="email"
-                  className='after:ml-0.5 after:text-destructive after:content-["*"]'
-                >
+                <FormLabel className='after:ml-0.5 after:text-destructive after:content-["*"]'>
                   Email
                 </FormLabel>
                 <FormControl>
@@ -123,7 +119,6 @@ const SignUpForm = () => {
                     autoComplete="on"
                     type="email"
                     placeholder="Your email"
-                    id="email"
                     {...field}
                   />
                 </FormControl>
@@ -136,10 +131,7 @@ const SignUpForm = () => {
             name="password"
             render={({ field }) => (
               <FormItem>
-                <FormLabel
-                  htmlFor="password"
-                  className='after:ml-0.5 after:text-destructive after:content-["*"]'
-                >
+                <FormLabel className='after:ml-0.5 after:text-destructive after:content-["*"]'>
                   Password
                 </FormLabel>
                 <FormControl>
@@ -149,7 +141,6 @@ const SignUpForm = () => {
                       autoComplete="on"
                       placeholder={isRavelio ? "Your password" : "********"}
                       type={isRavelio ? "text" : "password"}
-                      id="password"
                       {...field}
                     />
                     <span
@@ -173,10 +164,7 @@ const SignUpForm = () => {
             name="rePassword"
             render={({ field }) => (
               <FormItem>
-                <FormLabel
-                  htmlFor="confirm-password"
-                  className='after:ml-0.5 after:text-destructive after:content-["*"]'
-                >
+                <FormLabel className='after:ml-0.5 after:text-destructive after:content-["*"]'>
                   Confirm password
                 </FormLabel>
                 <FormControl>
@@ -188,7 +176,6 @@ const SignUpForm = () => {
                         isRavelio ? "Your confirm password" : "********"
                       }
                       type={isRavelio ? "text" : "password"}
-                      id="confirm-password"
                       {...field}
                     />
                     <span

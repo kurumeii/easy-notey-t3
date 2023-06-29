@@ -64,10 +64,7 @@ const SignInForm = () => {
             name="email"
             render={({ field }) => (
               <FormItem>
-                <FormLabel
-                  htmlFor="email"
-                  className='after:ml-0.5 after:text-destructive after:content-["*"]'
-                >
+                <FormLabel className='after:ml-0.5 after:text-destructive after:content-["*"]'>
                   Email
                 </FormLabel>
                 <FormControl>
@@ -76,7 +73,6 @@ const SignInForm = () => {
                     placeholder="Your email"
                     type="email"
                     className=""
-                    id="email"
                     {...field}
                   />
                 </FormControl>
@@ -89,10 +85,7 @@ const SignInForm = () => {
             name="password"
             render={({ field }) => (
               <FormItem>
-                <FormLabel
-                  htmlFor="password"
-                  className='after:ml-0.5 after:text-destructive after:content-["*"]'
-                >
+                <FormLabel className='after:ml-0.5 after:text-destructive after:content-["*"]'>
                   Password
                 </FormLabel>
                 <FormControl>
@@ -102,7 +95,6 @@ const SignInForm = () => {
                       placeholder={isRavelio ? "Your password" : "********"}
                       type={isRavelio ? "text" : "password"}
                       className=" pr-12"
-                      id="password"
                       {...field}
                     />
                     <span

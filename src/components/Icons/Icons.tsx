@@ -4,6 +4,7 @@ import {
   BookBookmark,
   Command,
   Devices,
+  DotsThree,
   Eye,
   FacebookLogo,
   FloppyDisk,
@@ -19,13 +20,17 @@ import {
   TwitterLogo,
 } from "@phosphor-icons/react"
 import {
+  Check,
+  ChevronDown,
   ChevronRight,
   Loader2Icon,
   LockIcon,
   MenuIcon,
+  PlusIcon,
   TagsIcon,
   UnlockIcon,
   User2Icon,
+  X,
   type LucideProps,
 } from "lucide-react"
 
@@ -74,6 +79,11 @@ export const Icons = {
   device: Devices,
   slash: ChevronRight,
   at: At,
+  create: PlusIcon,
+  toolbar: DotsThree,
+  chevronDown: ChevronDown,
+  check: Check,
+  close: X,
 }
 
 export type IconProps = (typeof Icons)[keyof typeof Icons]

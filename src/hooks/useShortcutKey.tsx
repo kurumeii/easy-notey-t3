@@ -7,7 +7,7 @@ export default function useShortcutKey(
   useEffect(() => {
     const keyDown = (e: KeyboardEvent) => {
       const cmdKey = e.ctrlKey || e.metaKey
-      if (cmdKey && e.key === keyName) {
+      if (cmdKey && e.key === keyName.toLowerCase()) {
         e.preventDefault()
         callBackFn()
       }

@@ -41,7 +41,11 @@ A web app for note-taking app built with love and joy.
 
 ### Main feats
 - [x] ~~Change between dark/light/devices themes~~
-- [ ] CRUD new notes
+- Dashboard: 
+  - [x] Show list of notes/ tags
+  - [ ] Create new note / tag
+  - [ ] Edit note/ tag
+  - [ ] Delete note/ tag
+- [ ] Search / filter notes
 - [ ] Markdown support editors
 - [ ] Auto saving for a number of times
-- [ ] Search / filter notes
