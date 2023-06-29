@@ -1,4 +1,5 @@
 import SearchBar from "@/components/Dashboard/SearchBar"
+import Toolbar from "@/components/Dashboard/Toolbar"
 import FloatButton from "@/components/FloatButton/FloatButton"
 import { Icons } from "@/components/Icons/Icons"
 import AppBar from "@/components/Landing/AppBar"
@@ -46,7 +47,7 @@ const UserNotePage = ({
           </Link>
           <Icons.slash className="h-5 w-5" />
           <span className="inline-flex items-center justify-center">
-            <Icons.at className="mr-1 h-5 w-5" weight={"bold"} />
+            <Icons.at className="mr-1 h-5 w-5" />
             {sessionData.user.name}
           </span>
         </div>
@@ -55,7 +56,7 @@ const UserNotePage = ({
       <div className="bg-background py-10">
         <div className="container flex w-full items-stretch gap-3">
           <SearchBar />
-          {/* <Toolbar /> */}
+          <Toolbar />
         </div>
         <FloatButton className="fixed bottom-0 left-0 mx-3 pb-3" />
       </div>

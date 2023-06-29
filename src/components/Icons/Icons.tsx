@@ -4,7 +4,6 @@ import {
   IconDots,
   IconKeyboard,
   IconSparkles,
-  type TablerIconsProps,
 } from "@tabler/icons-react"
 import {
   AtSignIcon,
@@ -35,6 +34,8 @@ import {
   type LucideProps,
 } from "lucide-react"
 
+export type IconProps = LucideProps
+
 export const Icons = {
   github: GithubIcon,
   twitter: TwitterIcon,
@@ -44,14 +45,14 @@ export const Icons = {
   burger: MenuIcon,
   signIn: LogInIcon,
   signOut: LogOutIcon,
-  loading: (props: LucideProps) => (
+  loading: (props: IconProps) => (
     <Loader2Icon {...props} className={cn(props.className, "animate-spin")} />
   ),
   lock: LockIcon,
   unlock: UnlockIcon,
   started: IconSparkles,
   userIcon: User2Icon,
-  markdown: (props?: LucideProps) => (
+  markdown: (props: IconProps) => (
     <svg
       {...props}
       xmlns="http://www.w3.org/2000/svg"
@@ -86,5 +87,3 @@ export const Icons = {
   check: Check,
   close: X,
 }
-
-export type IconProps = LucideProps & TablerIconsProps

@@ -9,7 +9,7 @@ import { Button } from "../Ui/button"
 type FormType = "SIGNIN" | "SIGNUP"
 type Oauths = {
   id: LiteralUnion<BuiltInProviderType>
-  icon: IconProps
+  icon: (props: IconProps) => JSX.Element
 }
 
 const oauths: Oauths[] = [

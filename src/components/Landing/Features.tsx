@@ -4,7 +4,7 @@ import { Icons, type IconProps } from "../Icons/Icons"
 type Feats = {
   title: string
   description: string
-  icons: IconProps
+  icons: (props: IconProps) => JSX.Element
 }
 
 const feats: Feats[] = [
