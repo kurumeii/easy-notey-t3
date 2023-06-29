@@ -18,9 +18,10 @@ const config = {
     domains: [
       "upload.wikimedia.org",
       "raw.githubusercontent.com",
+      "avatars.githubusercontent.com",
+      "camo.githubusercontent.com",
       "trpc.io",
       "next-auth.js.org",
-      "avatars.githubusercontent.com",
       "codemirror.net",
       "zod.dev",
     ],

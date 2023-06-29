@@ -79,7 +79,7 @@ const techs: Tech[] = [
   {
     title: "Tabler Icons",
     link: "https://tabler-icons.io/",
-    logo: "/public/image/brand-tabler.svg",
+    logo: "https://camo.githubusercontent.com/b79420f4f495b82fede615462294a9e8fbe5535428823414b8424582bbc874a1/68747470733a2f2f707265766965772e7461626c65722e696f2f7374617469632f6c6f676f2d736d616c6c2e737667",
   },
   {
     title: "Lucide Icons",
