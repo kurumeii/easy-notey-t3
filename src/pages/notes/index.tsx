@@ -1,5 +1,4 @@
 import SearchBar from "@/components/Dashboard/SearchBar"
-import Toolbar from "@/components/Dashboard/Toolbar"
 import FloatButton from "@/components/FloatButton/FloatButton"
 import { Icons } from "@/components/Icons/Icons"
 import AppBar from "@/components/Landing/AppBar"
@@ -14,17 +13,17 @@ import Link from "next/link"
 
 export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
   const sessionData = await getServerAuthSession(ctx)
-  if (sessionData) {
+  if (!sessionData) {
     return {
-      props: {
-        sessionData,
+      redirect: {
+        destination: "/",
+        permanent: true,
       },
     }
   }
   return {
-    redirect: {
-      destination: "/",
-      permanent: true,
+    props: {
+      sessionData,
     },
   }
 }
@@ -56,7 +55,7 @@ const UserNotePage = ({
       <div className="bg-background py-10">
         <div className="container flex w-full items-stretch gap-3">
           <SearchBar />
-          <Toolbar />
+          {/* <Toolbar /> */}
         </div>
         <FloatButton className="fixed bottom-0 left-0 mx-3 pb-3" />
       </div>

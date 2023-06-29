@@ -27,20 +27,12 @@ export const nextSeoConfig: NextSeoProps = {
       sizes: "114x114",
     },
   ],
-  // openGraph: {
-  //   site_name: "slug",
-  //   url: "https://slug-link-shorten.vercel.app/",
-  //   type: "website",
-  //   locale: "en_IE",
-  //   images: [
-  //     {
-  //       url: "/banner.jpg",
-  //       width: 1920,
-  //       height: 1080,
-  //       type: "image/jpg",
-  //     },
-  //   ],
-  // },
+  openGraph: {
+    site_name: "Easy notey",
+    url: "https://easy-notey.vercel.app/",
+    type: "website",
+    locale: "en_IE",
+  },
   twitter: {
     handle: "@Kurumeii",
     site: "@Kurumeii",

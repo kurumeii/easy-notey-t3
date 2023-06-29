@@ -1,5 +1,4 @@
 import { CreateTagSchema, type CreateTagSchemaForm } from "@/lib/schemas"
-import { available_colors } from "@/types"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import {
@@ -19,6 +18,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/Ui/select"
+import { available_colors } from "@/constants"
 import useCreateTag from "@/hooks/useCreateTag"
 import useDeteleTag from "@/hooks/useDeteleTag"
 import useGetTags from "@/hooks/useGetTags"

@@ -362,16 +362,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@phosphor-icons/react@npm:^2.0.10":
-  version: 2.0.10
-  resolution: "@phosphor-icons/react@npm:2.0.10"
-  peerDependencies:
-    react: ">= 16.8"
-    react-dom: ">= 16.8"
-  checksum: 534b167fe366f400b703cf937dc76f00ee089c32c847dbdb6d51ea2505f3262e636c1bb98f0b12eede21f785d96c716bd1ce08a6cdce328e940aa6d5b1d846b5
-  languageName: node
-  linkType: hard
-
 "@pkgjs/parseargs@npm:^0.11.0":
   version: 0.11.0
   resolution: "@pkgjs/parseargs@npm:0.11.0"
@@ -1844,6 +1834,25 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@tabler/icons-react@npm:^2.23.0":
+  version: 2.23.0
+  resolution: "@tabler/icons-react@npm:2.23.0"
+  dependencies:
+    "@tabler/icons": 2.23.0
+    prop-types: ^15.7.2
+  peerDependencies:
+    react: ^16.5.1 || ^17.0.0 || ^18.0.0
+  checksum: 9e40f615e20cd2a4f7a9f079fb076c8b53af7420b59b9cd80abc470c2cc39440012c0ede1779b5bca67a2f587d475571fd0c9b228e7e0071e069e90ccddc1828
+  languageName: node
+  linkType: hard
+
+"@tabler/icons@npm:2.23.0":
+  version: 2.23.0
+  resolution: "@tabler/icons@npm:2.23.0"
+  checksum: aceeebf5ea526e7cc00b128ae018f8501d78e4f5c91b4e0a1d4d5f2b6b9c67457f892b7f054e4f7f074b1189b4ea515455d130b8cf274265b5a12b67e1ee4d92
+  languageName: node
+  linkType: hard
+
 "@tanstack/query-core@npm:4.29.19":
   version: 4.29.19
   resolution: "@tanstack/query-core@npm:4.29.19"
@@ -3017,7 +3026,6 @@ __metadata:
   dependencies:
     "@hookform/resolvers": ^3.1.1
     "@next-auth/prisma-adapter": ^1.0.7
-    "@phosphor-icons/react": ^2.0.10
     "@prisma/client": ^4.16.1
     "@radix-ui/react-accordion": ^1.1.2
     "@radix-ui/react-alert-dialog": ^1.0.4
@@ -3046,6 +3054,7 @@ __metadata:
     "@radix-ui/react-toggle": ^1.0.3
     "@radix-ui/react-tooltip": ^1.0.6
     "@t3-oss/env-nextjs": ^0.6.0
+    "@tabler/icons-react": ^2.23.0
     "@tanstack/react-query": ^4.29.19
     "@trpc/client": ^10.33.0
     "@trpc/next": ^10.33.0
@@ -5731,7 +5740,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"prop-types@npm:^15.6.1, prop-types@npm:^15.8.1":
+"prop-types@npm:^15.6.1, prop-types@npm:^15.7.2, prop-types@npm:^15.8.1":
   version: 15.8.1
   resolution: "prop-types@npm:15.8.1"
   dependencies:

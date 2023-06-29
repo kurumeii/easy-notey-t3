@@ -77,12 +77,12 @@ const techs: Tech[] = [
     logo: "https://avatars.githubusercontent.com/u/108266839?s=200&v=4",
   },
   {
-    title: "Phosphor Icon",
-    link: "https://phosphoricons.com/",
-    logo: "https://raw.githubusercontent.com/phosphor-icons/homepage/master/meta/phosphor-mark-tight-yellow.png",
+    title: "Tabler Icons",
+    link: "https://tabler-icons.io/",
+    logo: "/public/image/brand-tabler.svg",
   },
   {
-    title: "Lucide Icon",
+    title: "Lucide Icons",
     link: "https://lucide.dev/",
     logo: "https://avatars.githubusercontent.com/u/66879934?s=200&v=4",
   },
