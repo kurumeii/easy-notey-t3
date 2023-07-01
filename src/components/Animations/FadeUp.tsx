@@ -1,4 +1,4 @@
-import { VARIANTS } from "@/lib/variants"
+import { FADE_UP_ANIMATION_VARIANTS } from "@/lib/variants"
 import { type FramerVariant } from "@/types"
 import { motion } from "framer-motion"
 
@@ -17,10 +17,7 @@ export function FadeUp({ children, className }: FramerVariant) {
         },
       }}
     >
-      <motion.div
-        className={className}
-        variants={VARIANTS.FADE_UP_ANIMATION_VARIANTS}
-      >
+      <motion.div className={className} variants={FADE_UP_ANIMATION_VARIANTS}>
         {children}
       </motion.div>
     </motion.div>

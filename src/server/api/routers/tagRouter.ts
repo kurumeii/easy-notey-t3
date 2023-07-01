@@ -1,10 +1,10 @@
-import { CreateTagSchema, DeleteTagSchema } from "@/lib/schemas"
+import { TagZod } from "@/lib/schemas/tag"
 import { TRPCError } from "@trpc/server"
 import { createTRPCRouter, protectedProcedure } from "../trpc"
 
 export const tagRouter = createTRPCRouter({
   createNewTag: protectedProcedure
-    .input(CreateTagSchema)
+    .input(TagZod["createTagSchema"])
     .mutation(async ({ input, ctx }) => {
       try {
         const { color, name } = input
@@ -33,25 +33,31 @@ export const tagRouter = createTRPCRouter({
         })
       }
     }),
-  getTag: protectedProcedure.query(async ({ ctx }) => {
-    try {
-      return await ctx.prisma.tag.findMany({
-        where: {
-          userId: ctx.session.user.id,
-        },
-        orderBy: {
-          createdAt: "desc",
-        },
-      })
-    } catch (error) {
-      throw new TRPCError({
-        code: "INTERNAL_SERVER_ERROR",
-        message: error as string,
-      })
-    }
-  }),
+  getTag: protectedProcedure
+    .input(TagZod["findTagSchema"])
+    .query(async ({ ctx, input }) => {
+      try {
+        return await ctx.prisma.tag.findMany({
+          where: {
+            label: {
+              startsWith: input.tagName,
+              mode: "insensitive",
+            },
+            userId: ctx.session.user.id,
+          },
+          orderBy: {
+            createdAt: "desc",
+          },
+        })
+      } catch (error) {
+        throw new TRPCError({
+          code: "INTERNAL_SERVER_ERROR",
+          message: error as string,
+        })
+      }
+    }),
   deleteTag: protectedProcedure
-    .input(DeleteTagSchema)
+    .input(TagZod["deleteTagSchema"])
     .mutation(async ({ ctx, input }) => {
       try {
         return await ctx.prisma.tag.delete({

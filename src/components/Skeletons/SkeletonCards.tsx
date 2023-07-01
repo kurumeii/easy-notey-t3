@@ -2,7 +2,11 @@ import { cn } from "@/lib/utils"
 import { type SkeletonProps } from "@/types"
 import { Skeleton } from "../Ui/skeleton"
 
-const AvatarSkeleton = ({ number = 1, className, rounded }: SkeletonProps) => {
+export default function SkeletonCards({
+  className,
+  number = 1,
+  rounded,
+}: SkeletonProps) {
   const arrayFormNumber = [...Array<typeof number>(number).keys()]
   return (
     <>
@@ -15,5 +19,3 @@ const AvatarSkeleton = ({ number = 1, className, rounded }: SkeletonProps) => {
     </>
   )
 }
-
-export default AvatarSkeleton

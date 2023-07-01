@@ -1,10 +1,9 @@
-import CreateNewForm from "../Forms/CreateNewForm"
+import { useState } from "react"
+import CreateNewNoteForm from "../Forms/CreateNewNoteForm"
 import { Icons } from "../Icons/Icons"
-import { Button } from "../Ui/button"
 import {
   Dialog,
   DialogContent,
-  DialogFooter,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
@@ -12,8 +11,9 @@ import {
 import { DropdownMenuItem } from "../Ui/dropdown-menu"
 
 const CreateNewModal = () => {
+  const [open, setOpen] = useState(false)
   return (
-    <Dialog>
+    <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
         <DropdownMenuItem onSelect={(e) => e.preventDefault()}>
           <Icons.create className="mr-2 h-5 w-5" />
@@ -24,11 +24,8 @@ const CreateNewModal = () => {
         <DialogHeader>
           <DialogTitle>New note</DialogTitle>
         </DialogHeader>
-        <CreateNewForm>
-          <DialogFooter>
-            <Button type="submit">Confirm</Button>
-          </DialogFooter>
-        </CreateNewForm>
+        {/* Create new form */}
+        <CreateNewNoteForm setOpen={setOpen} />
       </DialogContent>
     </Dialog>
   )

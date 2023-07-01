@@ -1,4 +1,4 @@
-import { CreateTagSchema, type CreateTagSchemaForm } from "@/lib/schemas"
+import { TagZod, type CreateTag } from "@/lib/schemas/tag"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import {
@@ -22,16 +22,21 @@ import { available_colors } from "@/constants"
 import useCreateTag from "@/hooks/useCreateTag"
 import useDeteleTag from "@/hooks/useDeteleTag"
 import useGetTags from "@/hooks/useGetTags"
+import { useToast } from "@/hooks/useToast"
+import { useEffect } from "react"
 import { Icons } from "../Icons/Icons"
+import SkeletonTagPill from "../Skeletons/SkeletonTagPill"
 import TagColorCircle from "../Tags/TagColorCircle"
 import TagPill from "../Tags/TagPill"
 import { Button } from "../Ui/button"
 import { DialogFooter } from "../Ui/dialog"
 import { ScrollArea } from "../Ui/scroll-area"
+import { ToastAction } from "../Ui/toast"
 
 const MangageTagForm = () => {
-  const form = useForm<CreateTagSchemaForm>({
-    resolver: zodResolver(CreateTagSchema),
+  const { toast } = useToast()
+  const form = useForm<CreateTag>({
+    resolver: zodResolver(TagZod["createTagSchema"]),
     defaultValues: {
       name: "",
     },
@@ -44,18 +49,37 @@ const MangageTagForm = () => {
     isLoading: deleteTagLoading,
     idSelected,
   } = useDeteleTag()
-  const { data: tagsData, isLoading: tagsLoading } = useGetTags()
+  const {
+    data: tagsData,
+    isLoading: tagsLoading,
+    error,
+    refetch,
+  } = useGetTags()
 
   const deleteTag = (id: string) =>
     deleteTagMutation({
       tagId: id,
     })
 
-  const onSubmit = (data: CreateTagSchemaForm) =>
+  const onSubmit = (data: CreateTag) =>
     createTagMutation({
       color: data.color,
       name: data.name,
     })
+
+  useEffect(() => {
+    error &&
+      toast({
+        title: "An error when fetching tags",
+        description: error.message ?? "Something went wrong",
+        variant: "destructive",
+        action: (
+          <ToastAction altText="Try again ?" onClick={() => void refetch()}>
+            Click to try again
+          </ToastAction>
+        ),
+      })
+  }, [error, refetch, toast])
 
   return (
     <Form {...form}>
@@ -65,13 +89,14 @@ const MangageTagForm = () => {
       >
         <div className="grid gap-1">
           <h4 className="text-xl font-semibold">All tags</h4>
-          {tagsLoading && <p>Loading tags ...</p>}
-          {!tagsData || tagsData.length === 0 ? (
-            <h3 className="text-sm text-muted-foreground">Nothing here</h3>
-          ) : (
-            <ScrollArea className="max-h-52 w-full rounded-sm border border-border duration-300 hover:max-h-full hover:shadow-lg">
-              <div className="mx-2 my-5 grid grid-cols-2 gap-3 md:grid-cols-3">
-                {tagsData.map(({ color, id, label }) => (
+          <ScrollArea className="max-h-52 w-full rounded-sm border border-border duration-300 hover:max-h-full hover:shadow-lg">
+            <div className="mx-2 my-5 grid grid-cols-2 gap-3 md:grid-cols-3">
+              {tagsLoading ? (
+                <SkeletonTagPill number={5} className="h-10 w-32" />
+              ) : !tagsData || tagsData.length === 0 ? (
+                <h3 className="text-sm text-muted-foreground">Nothing here</h3>
+              ) : (
+                tagsData.map(({ color, id, label }) => (
                   <TagPill
                     key={id}
                     label={label}
@@ -82,12 +107,12 @@ const MangageTagForm = () => {
                     loading={id === idSelected ? deleteTagLoading : false}
                     className="flex h-full flex-1 items-center justify-center p-3 text-xs"
                   />
-                ))}
-              </div>
-            </ScrollArea>
-          )}
+                ))
+              )}
+            </div>
+          </ScrollArea>
         </div>
-        <div className="grid gap-1">
+        <div className="grid gap-2">
           <h4 className="text-xl font-semibold">Create new tag</h4>
           <FormField
             control={form.control}

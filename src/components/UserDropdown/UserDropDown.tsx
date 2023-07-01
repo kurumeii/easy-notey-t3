@@ -15,7 +15,7 @@ import {
 
 const UserDropDown = () => {
   const { isLoading, user } = useGetSession()
-  if (isLoading) return <AvatarSkeleton />
+  if (isLoading) return <AvatarSkeleton rounded />
   return (
     <DropdownMenu>
       <DropdownMenuTrigger>

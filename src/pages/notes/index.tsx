@@ -1,3 +1,4 @@
+import NoteCards from "@/components/Dashboard/NoteCards"
 import SearchBar from "@/components/Dashboard/SearchBar"
 import Toolbar from "@/components/Dashboard/Toolbar"
 import FloatButton from "@/components/FloatButton/FloatButton"
@@ -37,7 +38,7 @@ const UserNotePage = ({
       <Head>
         <title>Your notes | Easey notey</title>
       </Head>
-      <AppBar className="sticky inset-x-0 top-0 z-20 flex w-full items-center justify-between bg-muted px-5 py-3 animate-in slide-in-from-top-full duration-500 md:px-10">
+      <AppBar className="fixed inset-x-0 top-0 z-20 flex w-full items-center justify-between bg-background px-5 py-3 backdrop-blur animate-in slide-in-from-top-full duration-500 md:px-10 ">
         <div className="flex w-full items-center gap-2">
           <Link className="flex items-center gap-3 font-semibold " href="/">
             <div className="flex h-12 w-12 flex-grow items-center justify-center rounded-full bg-primary">
@@ -53,11 +54,14 @@ const UserNotePage = ({
         </div>
         <UserDropDown />
       </AppBar>
-      <div className="bg-background py-10">
-        <div className="container flex w-full items-stretch gap-3">
+      <div className="container min-h-screen pb-10 pt-20">
+        <section className="flex w-full items-stretch gap-3">
           <SearchBar />
           <Toolbar />
-        </div>
+        </section>
+        <section className="my-10">
+          <NoteCards />
+        </section>
         <FloatButton className="fixed bottom-0 left-0 mx-3 pb-3" />
       </div>
     </>

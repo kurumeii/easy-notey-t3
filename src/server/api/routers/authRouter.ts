@@ -1,4 +1,4 @@
-import { SignUpSchema } from "@/lib/schemas"
+import { AuthZod } from "@/lib/schemas/auth"
 import { TRPCError } from "@trpc/server"
 import { genSaltSync, hashSync } from "bcrypt"
 import { createTRPCRouter, publicProcedure } from "../trpc"
@@ -6,7 +6,7 @@ import { createTRPCRouter, publicProcedure } from "../trpc"
 export const authRouter = createTRPCRouter({
   signUp: publicProcedure
     .input(
-      SignUpSchema.pick({
+      AuthZod.signUpSchema.pick({
         email: true,
         name: true,
         password: true,

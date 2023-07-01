@@ -1,4 +1,4 @@
-import { VARIANTS } from "@/lib/variants"
+import { APPEAR_VARIANTS } from "@/lib/variants"
 import { type FramerVariant } from "@/types"
 import { motion } from "framer-motion"
 
@@ -9,7 +9,7 @@ export function Appear({ children, className }: FramerVariant) {
       animate="visible"
       viewport={{ once: true }}
       className={className}
-      variants={VARIANTS.APPEAR_VARIANTS}
+      variants={APPEAR_VARIANTS}
     >
       {children}
     </motion.div>
