@@ -25,12 +25,11 @@ import useGetTags from "@/hooks/useGetTags"
 import { useToast } from "@/hooks/useToast"
 import { useEffect } from "react"
 import { Icons } from "../Icons/Icons"
-import SkeletonTagPill from "../Skeletons/SkeletonTagPill"
 import TagColorCircle from "../Tags/TagColorCircle"
+import TagList from "../Tags/TagList"
 import TagPill from "../Tags/TagPill"
 import { Button } from "../Ui/button"
 import { DialogFooter } from "../Ui/dialog"
-import { ScrollArea } from "../Ui/scroll-area"
 import { ToastAction } from "../Ui/toast"
 
 const MangageTagForm = () => {
@@ -49,6 +48,7 @@ const MangageTagForm = () => {
     isLoading: deleteTagLoading,
     idSelected,
   } = useDeteleTag()
+
   const {
     data: tagsData,
     isLoading: tagsLoading,
@@ -61,11 +61,17 @@ const MangageTagForm = () => {
       tagId: id,
     })
 
-  const onSubmit = (data: CreateTag) =>
+  const onSubmit = (data: CreateTag) => {
     createTagMutation({
       color: data.color,
       name: data.name,
     })
+
+    form.reset({
+      color: undefined,
+      name: "",
+    })
+  }
 
   useEffect(() => {
     error &&
@@ -87,31 +93,26 @@ const MangageTagForm = () => {
         onSubmit={(evn) => void form.handleSubmit(onSubmit)(evn)}
         className="space-y-8"
       >
-        <div className="grid gap-1">
-          <h4 className="text-xl font-semibold">All tags</h4>
-          <ScrollArea className="max-h-52 w-full rounded-sm border border-border duration-300 hover:max-h-full hover:shadow-lg">
-            <div className="mx-2 my-5 grid grid-cols-2 gap-3 md:grid-cols-3">
-              {tagsLoading ? (
-                <SkeletonTagPill number={5} className="h-10 w-32" />
-              ) : !tagsData || tagsData.length === 0 ? (
-                <h3 className="text-sm text-muted-foreground">Nothing here</h3>
-              ) : (
-                tagsData.map(({ color, id, label }) => (
-                  <TagPill
-                    key={id}
-                    label={label}
-                    color={color}
-                    deletable
-                    destructive
-                    onClickDelete={() => deleteTag(id)}
-                    loading={id === idSelected ? deleteTagLoading : false}
-                    className="flex h-full flex-1 items-center justify-center p-3 text-xs"
-                  />
-                ))
-              )}
-            </div>
-          </ScrollArea>
-        </div>
+        <TagList
+          skeletonNumber={5}
+          title="All tags"
+          isLoading={tagsLoading}
+          emptyMessage="Nothing here"
+          isEmpty={!tagsData || tagsData.length === 0}
+        >
+          {tagsData?.map(({ color, id, label }) => (
+            <TagPill
+              key={id}
+              label={label}
+              color={color}
+              loading={id === idSelected ? deleteTagLoading : false}
+              className="flex h-full flex-1 items-center justify-center p-3 text-xs"
+              destructive
+              deletable
+              onClickDelete={() => deleteTag(id)}
+            />
+          ))}
+        </TagList>
         <div className="grid gap-2">
           <h4 className="text-xl font-semibold">Create new tag</h4>
           <FormField
@@ -157,7 +158,7 @@ const MangageTagForm = () => {
                       <SelectValue placeholder="Select a color" />
                     </SelectTrigger>
                   </FormControl>
-                  <SelectContent>
+                  <SelectContent className="max-h-52">
                     {available_colors.map(({ color, text }) => (
                       <SelectItem key={color} value={color}>
                         <div className="inline-flex w-full items-center">

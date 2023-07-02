@@ -1,12 +1,12 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 import useCreateNote from "@/hooks/useCreateNote"
 import useGetTags from "@/hooks/useGetTags"
 import { NoteZod, type CreateNewNote } from "@/lib/schemas/note"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useMemo, type Dispatch, type SetStateAction } from "react"
 import { useForm } from "react-hook-form"
-import ReactSelect from "react-select"
-import makeAnimated from "react-select/animated"
 import { Icons } from "../Icons/Icons"
+import ReactSelect from "../ReactSelect/ReactSelect"
 import { Button } from "../Ui/button"
 import { DialogFooter } from "../Ui/dialog"
 import {
@@ -19,15 +19,13 @@ import {
 } from "../Ui/form"
 import { Input } from "../Ui/input"
 
-const animatedComponents = makeAnimated()
-
 type Props = {
   setOpen: Dispatch<SetStateAction<boolean>>
 }
 
 const CreateNewNoteForm = (props: Props) => {
   const { setOpen } = props
-  const { data: tagsData } = useGetTags()
+  const { data: tagsData, isLoading: tagsLoading } = useGetTags()
   const { mutate: createNoteMutation, isLoading: createNoteLoading } =
     useCreateNote()
   const tagOptions = useMemo(
@@ -45,7 +43,6 @@ const CreateNewNoteForm = (props: Props) => {
     resolver: zodResolver(NoteZod["createNewNoteSchema"]),
     defaultValues: {
       title: "",
-      tags: [],
     },
   })
 
@@ -85,20 +82,20 @@ const CreateNewNoteForm = (props: Props) => {
             <FormItem>
               <FormLabel>Tags</FormLabel>
               <FormControl>
+                {/* @ts-ignore-error */}
                 <ReactSelect
-                  {...field}
-                  isClearable
-                  isSearchable
                   isMulti
-                  components={animatedComponents}
+                  isSearchable
+                  isClearable
+                  isLoading={tagsLoading}
                   options={tagOptions}
+                  {...field}
                 />
               </FormControl>
               <FormMessage />
             </FormItem>
           )}
         />
-
         <DialogFooter>
           <Button disabled={createNoteLoading} type="submit">
             {createNoteLoading ? (

@@ -1,5 +1,5 @@
 import { useToast } from "@/hooks/useToast"
-import { SignInForm, SignInSchema } from "@/lib/schemas"
+import { AuthZod, type SignIn } from "@/lib/schemas/auth"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { signIn } from "next-auth/react"
 import { useRouter } from "next/router"
@@ -22,15 +22,15 @@ const SignInForm = () => {
   const [isRavelio, setRavelio] = useState(false)
   const { toast } = useToast()
   const { push } = useRouter()
-  const form = useForm<SignInForm>({
-    resolver: zodResolver(SignInSchema),
+  const form = useForm<SignIn>({
+    resolver: zodResolver(AuthZod["signInSchema"]),
     defaultValues: {
       email: "",
       password: "",
     },
   })
 
-  const onSubmitFn: SubmitHandler<SignInForm> = async (data) => {
+  const onSubmitFn: SubmitHandler<SignIn> = async (data) => {
     setIsFormLoading(true)
     const response = await signIn("credentials", {
       ...data,

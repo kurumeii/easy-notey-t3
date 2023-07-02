@@ -1,5 +1,5 @@
 import { useToast } from "@/hooks/useToast"
-import { SignUpForm, SignUpSchema } from "@/lib/schemas"
+import { AuthZod, type SignUp } from "@/lib/schemas/auth"
 import { api } from "@/utils/api"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { signIn } from "next-auth/react"
@@ -23,9 +23,9 @@ const SignUpForm = () => {
   const { push } = useRouter()
   const [isRavelio, setRavelio] = useState(false)
 
-  const form = useForm<SignUpForm>({
+  const form = useForm<SignUp>({
     resolver: zodResolver(
-      SignUpSchema.superRefine(({ password, rePassword }, ctx) => {
+      AuthZod["signUpSchema"].superRefine(({ password, rePassword }, ctx) => {
         if (rePassword !== password) {
           ctx.addIssue({
             code: "custom",
@@ -52,10 +52,6 @@ const SignUpForm = () => {
       })
     },
     onSuccess: async () => {
-      toast({
-        title: "Created new successful",
-        description: "Wait for page to redirect to login page",
-      })
       const response = await signIn("credentials", {
         email: form.getValues("email"),
         password: form.getValues("password"),
@@ -76,7 +72,7 @@ const SignUpForm = () => {
     },
   })
 
-  const onSubmitFn: SubmitHandler<SignUpForm> = (data) => {
+  const onSubmitFn: SubmitHandler<SignUp> = (data) => {
     signUp.mutate({
       ...data,
     })
