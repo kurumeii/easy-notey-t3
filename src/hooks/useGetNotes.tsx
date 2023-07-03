@@ -1,20 +1,30 @@
 import { type GetNote } from "@/lib/schemas/note"
 import { api } from "@/utils/api"
-import useGetSession from "./useGetSession"
+import { useEffect } from "react"
+import { useToast } from "./useToast"
 
 type GetNoteProps = GetNote
 
 export default function useGetNotes(props: GetNoteProps) {
-  const { user } = useGetSession()
-  return api.notes.getNotes.useInfiniteQuery(
+  const { toast } = useToast()
+  const notesQuery = api.notes.getNotes.useInfiniteQuery(
     {
       ...props,
     },
     {
-      enabled: !!user,
       staleTime: 10 * 1000,
       keepPreviousData: true,
       getNextPageParam: (lastPage) => lastPage.nextCursor,
     }
   )
+  useEffect(() => {
+    notesQuery.error &&
+      toast({
+        variant: "destructive",
+        title: "An error has occured",
+        description: notesQuery.error.message ?? "Something went wrong",
+      })
+  }, [notesQuery.error, toast])
+
+  return notesQuery
 }

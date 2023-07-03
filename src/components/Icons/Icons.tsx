@@ -13,6 +13,7 @@ import {
   ChevronRight,
   ChevronUpIcon,
   CommandIcon,
+  EditIcon,
   EyeIcon,
   FacebookIcon,
   GithubIcon,
@@ -92,4 +93,5 @@ export const Icons = {
   descSort: SortDesc,
   check: Check,
   close: X,
+  edit: EditIcon,
 }

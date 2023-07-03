@@ -7,20 +7,16 @@ import {
 } from "@/components/Ui/card"
 import useGetNotes from "@/hooks/useGetNotes"
 import { useAppSelector } from "@/hooks/useRedux"
-import { useToast } from "@/hooks/useToast"
 import { motion, useInView } from "framer-motion"
 import { useEffect, useRef } from "react"
+import EditNoteModal from "../Modals/EditNoteModal"
 import SkeletonCards from "../Skeletons/SkeletonCards"
 import TagPill from "../Tags/TagPill"
-import { ToastAction } from "../Ui/toast"
 
 const NoteCards = () => {
   const { sorting, searchQuery } = useAppSelector((s) => s.search)
-  const { toast } = useToast()
   const {
     isLoading: noteDataLoading,
-    refetch,
-    error,
     fetchNextPage,
     data: notesData,
     isFetchingNextPage,
@@ -31,25 +27,11 @@ const NoteCards = () => {
   })
 
   const loadMoreRef = useRef(null)
-
   const inView = useInView(loadMoreRef)
 
   useEffect(() => {
     inView && void fetchNextPage()
   }, [fetchNextPage, inView])
-
-  useEffect(() => {
-    error &&
-      toast({
-        title: "An error has occured",
-        description: error.message ?? "Something went wrong",
-        action: (
-          <ToastAction altText="try again" onClick={() => void refetch()}>
-            Try again
-          </ToastAction>
-        ),
-      })
-  }, [error, refetch, toast])
 
   return (
     <>
@@ -76,18 +58,16 @@ const NoteCards = () => {
                     >
                       <Card
                         tabIndex={0}
-                        className="h-full shadow-sm transition-all hover:shadow-lg focus:shadow-lg dark:hover:border-primary"
+                        className="flex h-full w-full shadow-sm transition-all hover:shadow-lg focus:shadow-lg dark:hover:border-primary"
                       >
-                        <CardHeader>
+                        <CardHeader className="w-32 flex-1 ">
                           <CardTitle className="overflow-hidden text-ellipsis">
                             {title}
                           </CardTitle>
                           <CardDescription>
                             Created at {createdAt.toLocaleDateString()}
                           </CardDescription>
-                        </CardHeader>
-                        <CardContent>
-                          <div className="flex flex-wrap gap-2 space-x-4 text-sm text-muted-foreground">
+                          <div className="mt-3 flex flex-wrap gap-2 space-x-4 text-sm text-muted-foreground">
                             {tags.map((tag) => (
                               <TagPill
                                 key={tag.label}
@@ -96,6 +76,9 @@ const NoteCards = () => {
                               />
                             ))}
                           </div>
+                        </CardHeader>
+                        <CardContent className="my-3">
+                          <EditNoteModal noteId={id} />
                         </CardContent>
                       </Card>
                     </motion.div>

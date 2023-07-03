@@ -83,4 +83,30 @@ export const noteRouter = createTRPCRouter({
         })
       }
     }),
+  getNoteById: protectedProcedure
+    .input(NoteZod["getNoteById"])
+    .query(async ({ ctx, input }) => {
+      try {
+        return ctx.prisma.note.findUnique({
+          where: {
+            id: input.noteId,
+          },
+          select: {
+            id: true,
+            title: true,
+            tags: {
+              select: {
+                label: true,
+                color: true,
+              },
+            },
+          },
+        })
+      } catch (error) {
+        throw new TRPCError({
+          code: "INTERNAL_SERVER_ERROR",
+          message: error as string,
+        })
+      }
+    }),
 })
