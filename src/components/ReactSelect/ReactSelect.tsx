@@ -1,16 +1,18 @@
 // import ReactSelect from "react-select"
+import { forwardRef, type ForwardedRef } from "react"
 import Select, { type GroupBase, type Props } from "react-select"
 import makeAnimated from "react-select/animated"
 const animatedComponents = makeAnimated()
 
-function ReactSelect<
+export default forwardRef(function ReactSelect<
   Option,
   IsMulti extends boolean = false,
   Group extends GroupBase<Option> = GroupBase<Option>
->(props: Props<Option, IsMulti, Group>) {
+>({ ...props }: Props<Option, IsMulti, Group>, ref?: ForwardedRef<unknown>) {
   return (
     <Select
       {...props}
+      ref={ref}
       components={animatedComponents}
       classNames={{
         placeholder: () => "text-sm !text-muted-foreground",
@@ -37,6 +39,4 @@ function ReactSelect<
       })}
     />
   )
-}
-
-export default ReactSelect
+})

@@ -1,10 +1,9 @@
 import { api } from "@/utils/api"
-import useGetTags from "./useGetTags"
 import { useToast } from "./useToast"
 
 export default function useCreateTag() {
   const { toast } = useToast()
-  const { refetch } = useGetTags()
+  const cacheTags = api.useContext().tags.getAllTags
   return api.tags.createNewTag.useMutation({
     onError(error) {
       toast({
@@ -18,7 +17,7 @@ export default function useCreateTag() {
         title: "A new tag has been created ✨",
         duration: 2 * 1000,
       })
-      await refetch()
+      await cacheTags.invalidate()
     },
   })
 }

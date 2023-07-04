@@ -67,7 +67,7 @@ const NoteCards = () => {
                           <CardDescription>
                             Created at {createdAt.toLocaleDateString()}
                           </CardDescription>
-                          <div className="mt-3 flex flex-wrap gap-2 space-x-4 text-sm text-muted-foreground">
+                          <div className="mt-3 flex flex-wrap justify-start gap-2 space-x-4 text-sm text-muted-foreground">
                             {tags.map((tag) => (
                               <TagPill
                                 key={tag.label}

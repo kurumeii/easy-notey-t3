@@ -1,3 +1,4 @@
+import { cn } from "@/lib/utils"
 import { cva, type VariantProps } from "class-variance-authority"
 import { Icons } from "../Icons/Icons"
 import { Button } from "../Ui/button"
@@ -52,7 +53,16 @@ export default function TagPill({
 }: TagPillVariantProps) {
   return (
     <div className="inline-flex">
-      <p className={tagPillStyles({ color, deletable, className })}>{label}</p>
+      <div
+        className={cn(
+          tagPillStyles({ color, deletable, className }),
+          "flex-1 "
+        )}
+      >
+        <span title={label} className="max-w-[150px] truncate text-ellipsis">
+          {label}
+        </span>
+      </div>
       {deletable && (
         <TooltipProvider delayDuration={300}>
           <Tooltip>

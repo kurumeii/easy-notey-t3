@@ -1,10 +1,11 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 import useCreateNote from "@/hooks/useCreateNote"
-import useGetTags from "@/hooks/useGetTags"
+import useGetTag from "@/hooks/useGetTag"
 import { NoteZod, type CreateNewNote } from "@/lib/schemas/note"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useMemo, type Dispatch, type SetStateAction } from "react"
 import { useForm } from "react-hook-form"
+import { createFilter } from "react-select"
 import { Icons } from "../Icons/Icons"
 import ReactSelect from "../ReactSelect/ReactSelect"
 import { Button } from "../Ui/button"
@@ -25,7 +26,7 @@ type Props = {
 
 const CreateNewNoteForm = (props: Props) => {
   const { setOpen } = props
-  const { data: tagsData, isLoading: tagsLoading } = useGetTags()
+  const { data: tagsData, isLoading: tagsLoading } = useGetTag()
   const { mutate: createNoteMutation, isLoading: createNoteLoading } =
     useCreateNote()
   const tagOptions = useMemo(
@@ -84,12 +85,16 @@ const CreateNewNoteForm = (props: Props) => {
               <FormControl>
                 {/* @ts-ignore-error */}
                 <ReactSelect
+                  {...field}
                   isMulti
                   isSearchable
                   isClearable
                   isLoading={tagsLoading}
                   options={tagOptions}
-                  {...field}
+                  filterOption={createFilter({
+                    matchFrom: "start",
+                    ignoreCase: true,
+                  })}
                 />
               </FormControl>
               <FormMessage />

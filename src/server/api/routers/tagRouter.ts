@@ -33,16 +33,55 @@ export const tagRouter = createTRPCRouter({
         })
       }
     }),
+  getAllTags: protectedProcedure
+    .input(TagZod["inifityTagSchema"])
+    .query(async ({ ctx, input }) => {
+      try {
+        const limit = input.limit ?? 6
+        const tags = await ctx.prisma.tag.findMany({
+          take: limit + 1,
+          where: {
+            userId: ctx.session.user.id,
+            label: {
+              mode: "insensitive",
+              contains: input.tagName,
+            },
+          },
+          cursor: input.cursor ? { id: input.cursor } : undefined,
+          orderBy: {
+            createdAt: "desc",
+          },
+        })
+        if (!tags) {
+          throw new TRPCError({
+            code: "NOT_FOUND",
+            message: "Cannot found any tag",
+          })
+        }
+        const nextCursor = tags.length > limit ? tags.pop()?.id : undefined
+        return {
+          tags,
+          nextCursor,
+        }
+      } catch (error) {
+        throw new TRPCError({
+          code: "INTERNAL_SERVER_ERROR",
+          message: error as string,
+        })
+      }
+    }),
   getTag: protectedProcedure
     .input(TagZod["findTagSchema"])
     .query(async ({ ctx, input }) => {
       try {
         return await ctx.prisma.tag.findMany({
           where: {
-            label: {
-              startsWith: input.tagName,
-              mode: "insensitive",
-            },
+            ...(input.tagName && {
+              label: {
+                startsWith: input.tagName,
+                mode: "insensitive",
+              },
+            }),
             userId: ctx.session.user.id,
           },
           orderBy: {

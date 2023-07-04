@@ -1,30 +1,30 @@
 import MangageTagForm from "../Forms/MangageTagForm"
 import { Icons } from "../Icons/Icons"
-import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "../Ui/dialog"
 import { DropdownMenuItem } from "../Ui/dropdown-menu"
+import {
+  Sheet,
+  SheetContent,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from "../Ui/sheet"
 
 const MangageTagsModal = () => {
   return (
-    <Dialog>
-      <DialogTrigger asChild>
+    <Sheet>
+      <SheetTrigger asChild>
         <DropdownMenuItem onSelect={(e) => e.preventDefault()}>
           <Icons.tags className="mr-2 h-5 w-5" />
           Manage tags
         </DropdownMenuItem>
-      </DialogTrigger>
-      <DialogContent>
-        <DialogHeader>
-          <DialogTitle>Manage tags</DialogTitle>
-        </DialogHeader>
+      </SheetTrigger>
+      <SheetContent className="w-full md:w-1/2">
+        <SheetHeader>
+          <SheetTitle>Manage tags</SheetTitle>
+        </SheetHeader>
         <MangageTagForm />
-      </DialogContent>
-    </Dialog>
+      </SheetContent>
+    </Sheet>
   )
 }
 

@@ -22,18 +22,17 @@ import { available_colors } from "@/constants"
 import useCreateTag from "@/hooks/useCreateTag"
 import useDeteleTag from "@/hooks/useDeteleTag"
 import useGetTags from "@/hooks/useGetTags"
-import { useToast } from "@/hooks/useToast"
-import { useEffect } from "react"
 import { Icons } from "../Icons/Icons"
+import SkeletonTagPill from "../Skeletons/SkeletonTagPill"
 import TagColorCircle from "../Tags/TagColorCircle"
-import TagList from "../Tags/TagList"
 import TagPill from "../Tags/TagPill"
 import { Button } from "../Ui/button"
-import { DialogFooter } from "../Ui/dialog"
-import { ToastAction } from "../Ui/toast"
+import { ScrollArea } from "../Ui/scroll-area"
+import { SheetFooter } from "../Ui/sheet"
+
+const LIMIT = 6
 
 const MangageTagForm = () => {
-  const { toast } = useToast()
   const form = useForm<CreateTag>({
     resolver: zodResolver(TagZod["createTagSchema"]),
     defaultValues: {
@@ -43,6 +42,7 @@ const MangageTagForm = () => {
 
   const { mutate: createTagMutation, isLoading: createTagLoading } =
     useCreateTag()
+
   const {
     mutate: deleteTagMutation,
     isLoading: deleteTagLoading,
@@ -52,9 +52,12 @@ const MangageTagForm = () => {
   const {
     data: tagsData,
     isLoading: tagsLoading,
-    error,
-    refetch,
-  } = useGetTags()
+    isFetchingNextPage: fetchingNextTags,
+    fetchNextPage: getNextTag,
+    hasNextPage: hasNextTag,
+  } = useGetTags({
+    limit: LIMIT,
+  })
 
   const deleteTag = (id: string) =>
     deleteTagMutation({
@@ -66,26 +69,7 @@ const MangageTagForm = () => {
       color: data.color,
       name: data.name,
     })
-
-    form.reset({
-      color: undefined,
-      name: "",
-    })
   }
-
-  useEffect(() => {
-    error &&
-      toast({
-        title: "An error when fetching tags",
-        description: error.message ?? "Something went wrong",
-        variant: "destructive",
-        action: (
-          <ToastAction altText="Try again ?" onClick={() => void refetch()}>
-            Click to try again
-          </ToastAction>
-        ),
-      })
-  }, [error, refetch, toast])
 
   return (
     <Form {...form}>
@@ -93,26 +77,51 @@ const MangageTagForm = () => {
         onSubmit={(evn) => void form.handleSubmit(onSubmit)(evn)}
         className="space-y-8"
       >
-        <TagList
-          skeletonNumber={5}
-          title="All tags"
-          isLoading={tagsLoading}
-          emptyMessage="Nothing here"
-          isEmpty={!tagsData || tagsData.length === 0}
-        >
-          {tagsData?.map(({ color, id, label }) => (
-            <TagPill
-              key={id}
-              label={label}
-              color={color}
-              loading={id === idSelected ? deleteTagLoading : false}
-              className="flex h-full flex-1 items-center justify-center p-3 text-xs"
-              destructive
-              deletable
-              onClickDelete={() => deleteTag(id)}
-            />
-          ))}
-        </TagList>
+        {/* Tag list */}
+        <div className="grid gap-1">
+          <h4 className="text-xl font-semibold">All tags</h4>
+          {!tagsData || tagsData.pages.some((p) => p.tags.length === 0) ? (
+            <h3 className="text-sm text-muted-foreground">Nothing here</h3>
+          ) : (
+            <ScrollArea className="max-h-52 w-full rounded-sm border border-border duration-300  hover:shadow-lg">
+              <div className="m-5 grid grid-cols-2 grid-rows-2 gap-3 md:grid-cols-4">
+                {tagsLoading ? (
+                  <SkeletonTagPill number={5} className="h-10 w-32" />
+                ) : (
+                  tagsData?.pages?.flatMap(({ tags }) =>
+                    tags.map(({ id, label, color }) => (
+                      <TagPill
+                        key={id}
+                        label={label}
+                        color={color}
+                        loading={id === idSelected ? deleteTagLoading : false}
+                        className="flex h-full flex-1 items-center justify-center p-3 text-xs"
+                        destructive
+                        deletable
+                        onClickDelete={() => deleteTag(id)}
+                      />
+                    ))
+                  )
+                )}
+                {fetchingNextTags ? (
+                  <SkeletonTagPill number={3} />
+                ) : (
+                  hasNextTag && (
+                    <Button
+                      type="button"
+                      variant="link"
+                      className="mt-3"
+                      onClick={() => void getNextTag()}
+                    >
+                      Get {LIMIT} more
+                    </Button>
+                  )
+                )}
+              </div>
+            </ScrollArea>
+          )}
+        </div>
+        {/* Create new tag */}
         <div className="grid gap-2">
           <h4 className="text-xl font-semibold">Create new tag</h4>
           <FormField
@@ -178,7 +187,7 @@ const MangageTagForm = () => {
             )}
           />
         </div>
-        <DialogFooter>
+        <SheetFooter>
           <Button disabled={createTagLoading} type="submit">
             {createTagLoading ? (
               <>
@@ -192,7 +201,7 @@ const MangageTagForm = () => {
               </>
             )}
           </Button>
-        </DialogFooter>
+        </SheetFooter>
       </form>
     </Form>
   )
