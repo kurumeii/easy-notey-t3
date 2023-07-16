@@ -3,7 +3,7 @@ import useCreateNote from "@/hooks/useCreateNote"
 import useGetTag from "@/hooks/useGetTag"
 import { NoteZod, type CreateNewNote } from "@/lib/schemas/note"
 import { zodResolver } from "@hookform/resolvers/zod"
-import { useMemo, type Dispatch, type SetStateAction } from "react"
+import { type Dispatch, type SetStateAction } from "react"
 import { useForm } from "react-hook-form"
 import { createFilter } from "react-select"
 import { Icons } from "../Icons/Icons"
@@ -26,19 +26,9 @@ type Props = {
 
 const CreateNewNoteForm = (props: Props) => {
   const { setOpen } = props
-  const { data: tagsData, isLoading: tagsLoading } = useGetTag()
   const { mutate: createNoteMutation, isLoading: createNoteLoading } =
     useCreateNote()
-  const tagOptions = useMemo(
-    () =>
-      tagsData
-        ? tagsData.map((tag) => ({
-            value: tag.id,
-            label: tag.label,
-          }))
-        : [],
-    [tagsData]
-  )
+  const { tagOptions, isLoading: tagsLoading } = useGetTag()
 
   const form = useForm<CreateNewNote>({
     resolver: zodResolver(NoteZod["createNewNoteSchema"]),

@@ -60,14 +60,16 @@ const NoteCards = () => {
                         tabIndex={0}
                         className="flex h-full w-full shadow-sm transition-all hover:shadow-lg focus:shadow-lg dark:hover:border-primary"
                       >
-                        <CardHeader className="w-32 flex-1 ">
-                          <CardTitle className="overflow-hidden text-ellipsis">
-                            {title}
-                          </CardTitle>
-                          <CardDescription>
-                            Created at {createdAt.toLocaleDateString()}
-                          </CardDescription>
-                          <div className="mt-3 flex flex-wrap justify-start gap-2 space-x-4 text-sm text-muted-foreground">
+                        <CardHeader className="w-32 flex-1 justify-between">
+                          <div className="flex-1">
+                            <CardTitle className="overflow-hidden text-ellipsis">
+                              {title}
+                            </CardTitle>
+                            <CardDescription>
+                              Created at {createdAt.toLocaleDateString()}
+                            </CardDescription>
+                          </div>
+                          <div className="mt-3 flex flex-wrap justify-start gap-2 text-sm text-muted-foreground">
                             {tags.map((tag) => (
                               <TagPill
                                 key={tag.label}

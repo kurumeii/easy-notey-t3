@@ -18,7 +18,7 @@ const MangageTagsModal = () => {
           Manage tags
         </DropdownMenuItem>
       </SheetTrigger>
-      <SheetContent className="w-full md:w-1/2">
+      <SheetContent className="w-full md:w-2/3 lg:w-1/2">
         <SheetHeader>
           <SheetTitle>Manage tags</SheetTitle>
         </SheetHeader>

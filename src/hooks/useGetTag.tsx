@@ -1,11 +1,17 @@
 import { api } from "@/utils/api"
-import { useEffect } from "react"
+import { useEffect, useMemo } from "react"
 import { useToast } from "./useToast"
 
 export default function useGetTag(tagName?: string) {
-  const getTag = api.tags.getTag.useQuery({
-    tagName,
-  })
+  const getTag = api.tags.getTag.useQuery(
+    {
+      tagName,
+    },
+    {
+      enabled: true,
+      staleTime: 1 * 1000,
+    }
+  )
   const { toast } = useToast()
   useEffect(() => {
     if (getTag.error) {
@@ -17,5 +23,19 @@ export default function useGetTag(tagName?: string) {
     }
   }, [getTag.error, toast])
 
-  return getTag
+  const tagOptions = useMemo(
+    () =>
+      getTag.data
+        ? getTag.data.map((tag) => ({
+            value: tag.id,
+            label: tag.label,
+          }))
+        : [],
+    [getTag.data]
+  )
+
+  return {
+    ...getTag,
+    tagOptions,
+  }
 }

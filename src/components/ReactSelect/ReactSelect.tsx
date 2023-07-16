@@ -1,6 +1,6 @@
 // import ReactSelect from "react-select"
 import { forwardRef, type ForwardedRef } from "react"
-import Select, { type GroupBase, type Props } from "react-select"
+import Select, { createFilter, type GroupBase, type Props } from "react-select"
 import makeAnimated from "react-select/animated"
 const animatedComponents = makeAnimated()
 
@@ -11,6 +11,10 @@ export default forwardRef(function ReactSelect<
 >({ ...props }: Props<Option, IsMulti, Group>, ref?: ForwardedRef<unknown>) {
   return (
     <Select
+      filterOption={createFilter({
+        matchFrom: "start",
+        ignoreCase: true,
+      })}
       {...props}
       ref={ref}
       components={animatedComponents}

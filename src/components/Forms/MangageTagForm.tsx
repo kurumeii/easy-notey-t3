@@ -84,7 +84,7 @@ const MangageTagForm = () => {
             <h3 className="text-sm text-muted-foreground">Nothing here</h3>
           ) : (
             <ScrollArea className="max-h-52 w-full rounded-sm border border-border duration-300  hover:shadow-lg">
-              <div className="m-5 grid grid-cols-2 grid-rows-2 gap-3 md:grid-cols-4">
+              <div className="m-5 grid grid-cols-2 grid-rows-2 gap-3 md:grid-cols-3 lg:grid-cols-4">
                 {tagsLoading ? (
                   <SkeletonTagPill number={5} className="h-10 w-32" />
                 ) : (

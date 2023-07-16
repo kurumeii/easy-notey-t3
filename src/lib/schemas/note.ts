@@ -37,7 +37,8 @@ export const NoteZod = {
         value: z.string(),
         label: z.string(),
       })
-      .array(),
+      .array()
+      .optional(),
   }),
 }
 export type GetNote = z.infer<(typeof NoteZod)["getNoteSchema"]>

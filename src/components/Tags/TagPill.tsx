@@ -59,7 +59,10 @@ export default function TagPill({
           "flex-1 "
         )}
       >
-        <span title={label} className="max-w-[150px] truncate text-ellipsis">
+        <span
+          title={label}
+          className="w-full max-w-[100px] truncate text-ellipsis"
+        >
           {label}
         </span>
       </div>

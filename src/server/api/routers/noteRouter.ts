@@ -57,18 +57,7 @@ export const noteRouter = createTRPCRouter({
     .mutation(async ({ ctx, input }) => {
       try {
         const { tags, title } = input
-        const countTitle = await ctx.prisma.note.count({
-          where: {
-            title,
-            userId: ctx.session.user.id,
-          },
-        })
-        if (countTitle > 0) {
-          throw new TRPCError({
-            code: "BAD_REQUEST",
-            message: "Already existed title with name: " + title,
-          })
-        }
+
         return await ctx.prisma.note.create({
           data: {
             tagIds: tags.map((tag) => tag.value),
@@ -87,7 +76,7 @@ export const noteRouter = createTRPCRouter({
     .input(NoteZod["getNoteById"])
     .query(async ({ ctx, input }) => {
       try {
-        return ctx.prisma.note.findUnique({
+        return ctx.prisma.note.findUniqueOrThrow({
           where: {
             id: input.noteId,
           },
@@ -98,8 +87,29 @@ export const noteRouter = createTRPCRouter({
               select: {
                 label: true,
                 color: true,
+                id: true,
               },
             },
+          },
+        })
+      } catch (error) {
+        throw new TRPCError({
+          code: "INTERNAL_SERVER_ERROR",
+          message: error as string,
+        })
+      }
+    }),
+  editNote: protectedProcedure
+    .input(NoteZod["editNoteSchema"])
+    .mutation(async ({ ctx, input }) => {
+      try {
+        return await ctx.prisma.note.update({
+          where: {
+            id: input.noteId,
+          },
+          data: {
+            title: input.title,
+            tagIds: input.tags?.map((tag) => tag.value),
           },
         })
       } catch (error) {
