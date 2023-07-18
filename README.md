@@ -48,9 +48,9 @@ A web app for note-taking app built with love and joy.
 
 - [x] ~~Change between dark/light/devices themes~~
 - Dashboard:
-  - [x] Show list of notes/ tags
-  - [x] Create new note / tag
-  - [ ] Edit note/ tag
+  - [x] ~~Show list of notes/ tags~~
+  - [x] ~~Create new note / tag~~
+  - [x] ~~Edit note/ tag~~
   - [ ] Delete note/ tag
 - [ ] Search / filter notes
 - [ ] Markdown support editors
