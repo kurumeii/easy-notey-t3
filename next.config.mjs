@@ -15,6 +15,7 @@ const config = {
     ignoreDuringBuilds: true,
   },
   images: {
+    dangerouslyAllowSVG: true,
     domains: [
       "upload.wikimedia.org",
       "raw.githubusercontent.com",

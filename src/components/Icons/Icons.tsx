@@ -31,6 +31,7 @@ import {
   SortDesc,
   SunIcon,
   TagsIcon,
+  TrashIcon,
   TwitterIcon,
   UnlockIcon,
   User2Icon,
@@ -94,4 +95,5 @@ export const Icons = {
   check: Check,
   close: X,
   edit: EditIcon,
+  delete: TrashIcon
 }

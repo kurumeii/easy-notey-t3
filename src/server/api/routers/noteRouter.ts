@@ -111,6 +111,17 @@ export const noteRouter = createTRPCRouter({
             title: input.title,
             tagIds: input.tags?.map((tag) => tag.value),
           },
+          select: {
+            id: true,
+            title: true,
+            tags: {
+              select: {
+                label: true,
+                color: true,
+                id: true,
+              },
+            },
+          },
         })
       } catch (error) {
         throw new TRPCError({

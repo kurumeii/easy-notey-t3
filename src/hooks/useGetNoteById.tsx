@@ -1,5 +1,6 @@
 import { api } from "@/utils/api"
-import { useEffect } from "react"
+import { useEffect, useMemo } from "react"
+import useGetTag from "./useGetTag"
 import { useToast } from "./useToast"
 
 export default function useGetNoteById(noteId: string) {
@@ -8,9 +9,16 @@ export default function useGetNoteById(noteId: string) {
     { noteId },
     {
       enabled: false,
-      staleTime: 20 * 1000,
+      staleTime: 1000
     }
   )
+  const { tagOptions } = useGetTag()
+  
+    const selectedTags = useMemo(() => noteQuery.data?.tags.map((tag) => {
+        const idx = tagOptions.findIndex((opt) => opt.value === tag.id)
+        return tagOptions[idx]
+      }), [noteQuery.data?.tags, tagOptions])
+
   useEffect(() => {
     noteQuery.error &&
       toast({
@@ -20,5 +28,8 @@ export default function useGetNoteById(noteId: string) {
       })
   }, [noteQuery.error, toast])
 
-  return noteQuery
+  return {
+    ...noteQuery,
+    selectedTags
+  }
 }

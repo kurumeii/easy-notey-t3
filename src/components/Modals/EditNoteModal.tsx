@@ -1,6 +1,5 @@
 import useGetNoteById from "@/hooks/useGetNoteById"
-import useGetTag from "@/hooks/useGetTag"
-import { useMemo, useState } from "react"
+import { useState } from "react"
 import EditNoteForm from "../Forms/EditNoteForm"
 import { Icons } from "../Icons/Icons"
 import SkeletonCards from "../Skeletons/SkeletonCards"
@@ -20,18 +19,10 @@ function EditNoteModal({ noteId }: { noteId: string }) {
   const {
     isLoading: gettingNote,
     data: noteData,
-    refetch : fetchNote,
-  } = useGetNoteById(noteId)
-  const { tagOptions } = useGetTag()
-
-  const selectedTags = useMemo(
-    () =>
-      noteData?.tags.map((tag) => {
-        const idx = tagOptions.findIndex((opt) => opt.value === tag.id)
-        return tagOptions[idx]
-      }),
-    [noteData?.tags, tagOptions]
-  )
+    refetch: fetchNote,
+    selectedTags
+  } =
+    useGetNoteById(noteId)
 
   return (
     <Dialog open={isOpen} onOpenChange={setOpen}>

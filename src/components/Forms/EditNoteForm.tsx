@@ -33,9 +33,7 @@ type Props = {
 
 function EditNoteForm({ noteData, selectedTags, toggleModal }: Props) {
   const { mutate: editNoteMutation, isLoading: edittingNote } = useEditNote()
-
   const { tagOptions, isLoading: tagsLoading } = useGetTag()
-
   const form = useForm<EditNoteSchema>({
     resolver: zodResolver(NoteZod["editNoteSchema"]),
     defaultValues: {
@@ -96,7 +94,7 @@ function EditNoteForm({ noteData, selectedTags, toggleModal }: Props) {
                     isClearable
                     isLoading={tagsLoading}
                     options={tagOptions}
-                    defaultValue={noteData.tags}
+                    defaultValue={field.value}
                   />
                 </FormControl>
                 <FormMessage />
@@ -105,6 +103,10 @@ function EditNoteForm({ noteData, selectedTags, toggleModal }: Props) {
           />
         </div>
         <DialogFooter>
+          <Button variant='destructive' type="button" >
+            <Icons.delete className="mr-2 w-5 h-5" />
+            <span>Delete note</span>
+          </Button>
           <Button disabled={edittingNote} type="submit">
             {edittingNote ? (
               <>
