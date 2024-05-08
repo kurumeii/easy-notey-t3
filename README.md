@@ -54,4 +54,4 @@ A web app for note-taking app built with love and joy.
   - [ ] Delete note/ tag
 - [ ] Search / filter notes
 - [ ] Markdown support editors
-- [ ] Auto saving for a number of times
+- [ ] Auto saving for a set of times
